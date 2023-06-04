@@ -71,12 +71,12 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
+            'name' => Yii::t('app', 'Tên'),
             'slug' => Yii::t('app', 'Slug'),
-            'category_id' => Yii::t('app', 'Category ID'),
-            'is_parent' => Yii::t('app', 'Is Parent'),
-            'is_show' => Yii::t('app', 'Is Show'),
-            'created_at' => Yii::t('app', 'Created At'),
+            'category_id' => Yii::t('app', 'Thể loại cha'),
+            'is_parent' => Yii::t('app', 'Cha'),
+            'is_show' => Yii::t('app', 'Hiển thị'),
+            'created_at' => Yii::t('app', 'Thời gian tạo'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
@@ -99,5 +99,10 @@ class Category extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::class, ['id' => 'category_id']);
+    }
+
+    public static function getParent()
+    {
+        return self::find()->where(['is_parent' => 1])->orderBy(['id'=> SORT_DESC])->all();
     }
 }

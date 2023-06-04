@@ -2,19 +2,23 @@
 
 namespace frontend\controllers;
 
-use frontend\models\ResendVerificationEmailForm;
-use frontend\models\VerifyEmailForm;
 use Yii;
-use yii\base\InvalidArgumentException;
-use yii\web\BadRequestHttpException;
 use yii\web\Controller;
+use frontend\models\Post;
+use frontend\models\User;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
+use frontend\models\Customer;
+use yii\filters\AccessControl;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\CustomerSignup;
+use frontend\models\VerifyEmailForm;
+use yii\web\BadRequestHttpException;
+use frontend\models\ResetPasswordForm;
+use yii\base\InvalidArgumentException;
+use frontend\models\PasswordResetRequestForm;
+use frontend\models\ResendVerificationEmailForm;
 
 /**
  * Site controller
@@ -75,7 +79,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $hot = Post::find()->orderBy(['id' => SORT_DESC])->all();
+        return $this->render('index',[
+            'hot' =>$hot
+        ]);
     }
 
     /**
@@ -153,7 +160,7 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
-        $model = new SignupForm();
+        $model = new CustomerSignup();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
             return $this->goHome();
@@ -254,6 +261,55 @@ class SiteController extends Controller
 
         return $this->render('resendVerificationEmail', [
             'model' => $model
+        ]);
+    }
+
+
+    public function actionChangePassword()
+    {
+        if(Yii::$app->user->isGuest){
+            return $this->redirect('/login');
+        }
+        $model = Customer::find()->where(['id' => Yii::$app->user->id ])->one();
+        $pass = $model->password_hash;
+        if ($model->load(Yii::$app->request->post())) {
+            $oldPass = trim(Yii::$app->request->post()[$model->formName()]['password_old']);
+            if (password_verify($oldPass, $pass)) {
+                $newPass = trim(Yii::$app->request->post()[$model->formName()]['password_new']);
+                if ($oldPass != $newPass) {
+                    $rePass = trim(Yii::$app->request->post()[$model->formName()]['re_password']);
+                    if($rePass == $newPass){
+                        $model->password_hash = Yii::$app->security->generatePasswordHash($newPass);
+                        if ($model->save()) {
+                            \Yii::$app->user->logout();
+                            return $this->goHome();
+                        }
+                    }
+                    else{
+                    $model->addError('re_password', 'Mật khẩu không trùng khớp!');
+                    }                   
+
+                } else {
+                    $model->addError('password_hash', 'Mật khẩu mới không được trùng với mật khẩu cũ!');
+                }
+            } else {
+                $model->addError('password_old', 'Mật khẩu cũ không đúng!');
+            }
+        }
+        
+        return $this->render('change',[
+            'model'=>$model
+        ]);
+    }
+    public function actionInfo()
+    {
+        if(Yii::$app->user->isGuest){
+            return $this->redirect('/login');
+        }
+        $model = Customer::find()->where(['id' => Yii::$app->user->id ])->one();
+
+        return $this->render('info',[
+            'model'=>$model
         ]);
     }
 }

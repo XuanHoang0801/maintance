@@ -50,16 +50,34 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'the-loai/trang-<page:\d+>' => 'the-loai/index',
-                'the-loai/<id:\d+>'=>'the-loai/view',
-                'the-loai/<action:\w+>/<id:\d+>'=>'the-loai/<action>',
+                'the-loai/trang-<page:\d+>' => 'category/index',
+                'the-loai/<id:\d+>'=>'category/view',
+                'the-loai/<action:\w+>/<id:\d+>'=>'category/<action>',
+                'the-loai/' => 'category/index',
 
-                'the-loai/' => 'the-loai/index',
+                'bai-viet/trang-<page:\d+>' => 'post/index',
+                'bai-viet/<id:\d+>'=>'post/view',
+                'bai-viet/<action:\w+>/<id:\d+>'=>'post/<action>',
+                'bai-viet/' => 'post/index',
 
                 '<controller:\w+>/<action:\w+>/trang-<page:\d+>'=>'<controller>/<action>',
                 '<controller:\w+>/<id:\d+>'=>'<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
                 '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+            ],
+        ],
+
+        'i18n' => [
+            'translations' => [
+                'app' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    // 'basePath' => '@app/messages',
+                    'sourceLanguage' => 'vi',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                        'app/error' => 'error.php',
+                    ],
+                ],
             ],
         ],
         

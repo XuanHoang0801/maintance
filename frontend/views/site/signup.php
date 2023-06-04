@@ -5,6 +5,7 @@
 /** @var \frontend\models\SignupForm $model */
 
 use yii\bootstrap5\Html;
+use kartik\date\DatePicker;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = 'Signup';
@@ -22,6 +23,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
                 <?= $form->field($model, 'email') ?>
+                <?= $form->field($model, 'fullname') ?>
+                <?= $form->field($model, 'birthday') ?>
+                <?= '<label class="form-label">Birthday</label>'; ?>
+                <?= 
+                    DatePicker::widget([
+                        'name' => 'birthday',
+                        'type' => DatePicker::TYPE_COMPONENT_PREPEND,
+                        'value' => '1990/01/01',
+                        'pluginOptions' => [
+                            'autoclose' => true,
+                            'format' => 'yyyy/mm/dd'
+                        ]
+                    ]);
+                ?>
+                <?= $form->field($model, 'gender')->radioList( ['Nam'=>'Nam', 'Nữ' => 'Nữ']); ?>
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 

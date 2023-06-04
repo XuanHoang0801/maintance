@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\Menu $model */
 
-$this->title = Yii::t('app', 'Create Menu');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Menus'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = Yii::t('app', 'Tạo menu mới');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'menu'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = 'create';
 ?>
 <div class="menu-create">
 

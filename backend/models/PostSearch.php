@@ -18,7 +18,7 @@ class PostSearch extends Post
     {
         return [
             [['id', 'category_id', 'author_id', 'coin'], 'integer'],
-            [['title', 'slug', 'short', 'detail', 'image', 'created_at', 'updated_at'], 'safe'],
+            [['title', 'slug', 'short', 'detail', 'created_at', 'updated_at'], 'safe'],
             [['is_show', 'is_free'], 'boolean'],
         ];
     }

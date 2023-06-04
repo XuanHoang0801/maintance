@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\User;
 use yii\db\Expression;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -17,6 +18,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string|null $detail
  * @property int|null $category_id
  * @property int|null $author_id
+ * @property bool|null $is_hot
  * @property bool|null $is_show
  * @property bool|null $is_free
  * @property int|null $coin
@@ -48,7 +50,6 @@ class Post extends \yii\db\ActiveRecord
 
             [
                 'class' => TimestampBehavior::class,
-                'createdAtAttribute' => 'created_at',
                 'updatedAtAttribute' => 'updated_at',
                 'value' => new Expression('NOW()'),
             ],
@@ -63,9 +64,9 @@ class Post extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['category_id', 'author_id', 'coin'], 'integer'],
-            [['is_show', 'is_free'], 'boolean'],
+            [['is_show', 'is_free','is_hot'], 'boolean'],
             [['created_at', 'updated_at'], 'safe'],
-            [['title', 'slug', 'short', 'detail', 'image'], 'string', 'max' => 255],
+            [['title', 'slug', 'short', 'detail', 'image'], 'string'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['author_id' => 'id']],
         ];
@@ -78,18 +79,19 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'title' => Yii::t('app', 'Title'),
+            'title' => Yii::t('app', 'Tiêu đề'),
             'slug' => Yii::t('app', 'Slug'),
-            'short' => Yii::t('app', 'Short'),
-            'detail' => Yii::t('app', 'Detail'),
-            'category_id' => Yii::t('app', 'Category ID'),
-            'author_id' => Yii::t('app', 'Author ID'),
-            'is_show' => Yii::t('app', 'Is Show'),
-            'is_free' => Yii::t('app', 'Is Free'),
-            'coin' => Yii::t('app', 'Coin'),
-            'image' => Yii::t('app', 'Image'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'short' => Yii::t('app', 'Tóm tắt'),
+            'detail' => Yii::t('app', 'Chi tiết'),
+            'category_id' => Yii::t('app', 'Thể loại'),
+            'author_id' => Yii::t('app', 'Tác giả'),
+            'is_hot' => Yii::t('app', 'Nổi bật'),
+            'is_show' => Yii::t('app', 'Xuất bản'),
+            'is_free' => Yii::t('app', 'Miễn phí'),
+            'coin' => Yii::t('app', 'Xu'),
+            'image' => Yii::t('app', 'Hình ảnh'),
+            'created_at' => Yii::t('app', 'Ngày tạo'),
+            'updated_at' => Yii::t('app', 'Ngày cập nhật'),
         ];
     }
 

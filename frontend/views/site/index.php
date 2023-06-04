@@ -2,51 +2,119 @@
 
 /** @var yii\web\View $this */
 
-$this->title = 'My Yii Application';
+use backend\models\Setting;
+use frontend\assets\BackendAsset;
+
+$backend =  BackendAsset::register($this);
+$this->title = Setting::title()->content;
 ?>
-<div class="site-index">
-    <div class="p-5 mb-4 bg-transparent rounded-3">
-        <div class="container-fluid py-5 text-center">
-            <h1 class="display-4">Congratulations!</h1>
-            <p class="fs-5 fw-light">You have successfully created your Yii-powered application.</p>
-            <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+    <!-- Trending Area Start -->
+    <div class="trending-area fix">
+        <div class="container">
+            <div class="trending-main">
+                <!-- Trending Tittle -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="trending-tittle">
+                            <strong><?= Setting::trending()->content ?></strong>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <!-- Trending Top -->
+                        
+                        <!-- Trending Bottom -->
+                        <div class="trending-bottom">
+                            <div class="row">
+                                <?php foreach($hot as $listHost): ?>
+                                <div class="col-lg-4">
+                                    <div class="single-bottom mb-35">
+                                        <div class="trend-bottom-img mb-30">
+                                            <img src="<?= $backend->baseUrl.'/'.$listHost->image ?>" alt="">
+                                        </div>
+                                        <div class="trend-bottom-cap">
+                                            <h4><a href="details.html"><?= $listHost->title ?></a></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php endforeach ?>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Riht content -->
+                    <div class="col-lg-4">
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img src="assets/img/trending/right1.jpg" alt="">
+                            </div>
+                            <div class="trand-right-cap">
+                                <span class="color1">Concert</span>
+                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
+                            </div>
+                        </div>
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img src="assets/img/trending/right2.jpg" alt="">
+                            </div>
+                            <div class="trand-right-cap">
+                                <span class="color3">sea beach</span>
+                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
+                            </div>
+                        </div>
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img src="assets/img/trending/right3.jpg" alt="">
+                            </div>
+                            <div class="trand-right-cap">
+                                <span class="color2">Bike Show</span>
+                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
+                            </div>
+                        </div> 
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img src="assets/img/trending/right4.jpg" alt="">
+                            </div>
+                            <div class="trand-right-cap">
+                                <span class="color4">See beach</span>
+                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
+                            </div>
+                        </div>
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img src="assets/img/trending/right5.jpg" alt="">
+                            </div>
+                            <div class="trand-right-cap">
+                                <span class="color1">Skeping</span>
+                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+    <!-- Trending Area End -->
+  
+    <!--Start pagination -->
+    <!-- <div class="pagination-area pb-45 text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="single-wrap d-flex justify-content-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-start">
+                              <li class="page-item"><a class="page-link" href="#"><span class="flaticon-arrow roted"></span></a></li>
+                                <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                                <li class="page-item"><a class="page-link" href="#">02</a></li>
+                                <li class="page-item"><a class="page-link" href="#">03</a></li>
+                              <li class="page-item"><a class="page-link" href="#"><span class="flaticon-arrow right-arrow"></span></a></li>
+                            </ul>
+                          </nav>
+                    </div>
+                </div>
             </div>
         </div>
-
-    </div>
-</div>
+    </div> -->
+    <!-- End pagination  -->
