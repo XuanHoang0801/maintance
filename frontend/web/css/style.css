@@ -350,7 +350,7 @@ hr {
   background: #ff3500;
 }
 .btn {
-  background: #ff656a;
+  /* background: #ff656a; */
   -moz-user-select: none;
   text-transform: uppercase;
   color: #fff;

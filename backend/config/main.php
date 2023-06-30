@@ -59,6 +59,7 @@ return [
                 'bai-viet/<id:\d+>'=>'post/view',
                 'bai-viet/<action:\w+>/<id:\d+>'=>'post/<action>',
                 'bai-viet/' => 'post/index',
+                'bai-viet/<action:\w+>' => 'post/create',
 
                 '<controller:\w+>/<action:\w+>/trang-<page:\d+>'=>'<controller>/<action>',
                 '<controller:\w+>/<id:\d+>'=>'<controller>/view',

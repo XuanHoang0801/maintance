@@ -35,7 +35,7 @@ $this->title = Setting::title()->content;
                                             <img src="<?= $backend->baseUrl.'/'.$listHost->image ?>" alt="">
                                         </div>
                                         <div class="trend-bottom-cap">
-                                            <h4><a href="details.html"><?= $listHost->title ?></a></h4>
+                                            <h4><a href="/bai-viet/<?= $listHost->slug ?>.html"><?= $listHost->title ?></a></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -46,15 +46,24 @@ $this->title = Setting::title()->content;
                     <!-- Riht content -->
                     <div class="col-lg-4">
                         <div class="trand-right-single d-flex">
-                            <div class="trand-right-img">
-                                <img src="assets/img/trending/right1.jpg" alt="">
-                            </div>
                             <div class="trand-right-cap">
-                                <span class="color1">Concert</span>
-                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
+                                <span class="color1">Bài viết tính phí</span>
                             </div>
                         </div>
-                        <div class="trand-right-single d-flex">
+                        <?php foreach($charge as $chargeItem): ?>
+                            
+                            <div class="trand-right-single d-flex">
+                                <div class="trand-right-cap  d-flex">
+                                    <div class="trand-right-img">
+                                        <img src="<?= $backend->baseUrl.'/'.$chargeItem->image ?>" alt="" width="100px">
+                                    </div>
+                                    <h4><a href="/bai-viet/<?= $chargeItem->slug ?>.html"><?= $chargeItem->title ?></a></h4>
+                                </div>
+                            </div>
+                        <?php endforeach ?>
+
+
+                        <!-- <div class="trand-right-single d-flex">
                             <div class="trand-right-img">
                                 <img src="assets/img/trending/right2.jpg" alt="">
                             </div>
@@ -89,7 +98,7 @@ $this->title = Setting::title()->content;
                                 <span class="color1">Skeping</span>
                                 <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
                             </div>
-                        </div>
+                        </div>` -->
                     </div>
                 </div>
             </div>

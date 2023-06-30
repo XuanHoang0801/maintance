@@ -1,11 +1,13 @@
 <?php
 /** @var yii\web\View $this */
 
-use frontend\assets\BackendAsset;
 use yii\helpers\Html;
+use yii\web\YiiAsset;
+use frontend\assets\BackendAsset;
+use frontend\models\PostBuy;
 
+$this->registerJsFile('@web/js/popup.js', ['depends' =>  [yii\web\YiiAsset::className()], ]);
 $backend = BackendAsset::register($this);
-
 $this->title = $cat->name
 ?>
 <div class="row d-flex justify-content-between mt-3">
@@ -33,9 +35,9 @@ $this->title = $cat->name
                        
                                 if($list->is_free == 0){
                         ?>
-                            <p class = text-danger>Bài viết tính phí: <?=$list->coin?> xu</p>
+                            <p class = text-danger><?=$list->coin?> xu</p>
                         <?php } else {?>
-                            <p class = "text-success">Miễn phí</p>
+                            <p class = "text-primary">Miễn phí</p>
                         <?php } ?>
                               <p class= "text-warning">Bài viết của tôi</p>  
                             <a name="" id="" class="btn btn-danger" href="/bai-viet/<?=$list->slug?>.html" role="button">Chi tiết</a>
@@ -45,11 +47,23 @@ $this->title = $cat->name
                         <?php 
                             if($list->is_free == 0){
                         ?>
-                            <p class = text-danger>Bài viết tính phí: <?=$list->coin?> xu</p>
-                            <a name="" id="" class="btn btn-danger" role="button">Mua</a>
+                            <?php if(Yii::$app->user->isGuest){ ?>
+                                <p class = text-danger><?=$list->coin?> xu</p>
+                                <a href="/login" id="" class="btn btn-danger" role="button">Mua ngay</a>
+                            <?php
+                                 } else{
+                                    $check = PostBuy::find()->where(['post_id' => $list->id])->andWhere(['user_id' => Yii::$app->user->id])->one();
+                                    if($check){
+                            ?>
+                                <p class = text-success>Đã mua</p>
+                                <a name="" id="" class="btn btn-danger" href="/bai-viet/<?=$list->slug?>.html" role="button">Chi tiết</a>
+                            <?php } else{ ?>
+                                <p class = text-danger><?=$list->coin?> xu</p>
 
-                        <?php } else {?>
-                            <p class = "text-success">Miễn phí</p>
+                                <button type="button" class="btn btn-primary select" data-id= "<?= $list->id ?>" data-toggle="modal" data-target="#myModal">Mua ngay</button>
+
+                        <?php } } }else {?>
+                            <p class = "text-primary">Miễn phí</p>
                             <a name="" id="" class="btn btn-danger" href="/bai-viet/<?=$list->slug?>.html" role="button">Chi tiết</a>
                         <?php } }  ?>
 
@@ -59,4 +73,25 @@ $this->title = $cat->name
             </div>
         <?php endforeach ?>
     </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title " id="exampleModalLabel">Thông báo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có chắc chắn muốn Mua ngay bài viết này không?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="button" class="btn btn-primary ok">Đồng ý</button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -79,9 +79,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $hot = Post::find()->orderBy(['id' => SORT_DESC])->all();
+        $hot = Post::find()->where(['is_free' => 1])->andWhere(['is_hot' => 1])->orderBy(['id' => SORT_DESC])->all();
+        $charge = Post::find()->where(['is_free' => 0])->orderBy(['id' => SORT_DESC])->all();
         return $this->render('index',[
-            'hot' =>$hot
+            'hot' =>$hot,
+            'charge' => $charge
         ]);
     }
 
@@ -312,4 +314,6 @@ class SiteController extends Controller
             'model'=>$model
         ]);
     }
+
+    
 }
