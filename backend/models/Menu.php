@@ -72,13 +72,13 @@ class Menu extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
+            'name' => Yii::t('app', 'Tên'),
             'slug' => Yii::t('app', 'Slug'),
-            'parent_id' => Yii::t('app', 'Parent ID'),
-            'is_parent' => Yii::t('app', 'Is Parent'),
-            'is_show' => Yii::t('app', 'Is Show'),
+            'parent_id' => Yii::t('app', 'Thể loại cha'),
+            'is_parent' => Yii::t('app', 'Cha'),
+            'is_show' => Yii::t('app', 'HIển thị'),
             'icon' => Yii::t('app', 'Icon'),
-            'created_at' => Yii::t('app', 'Created At'),
+            'created_at' => Yii::t('app', 'Thời gian tạo'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }

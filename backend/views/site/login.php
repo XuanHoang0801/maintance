@@ -6,27 +6,31 @@
 
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
-
-$this->title = 'Login';
+$this->registerCssFile(Yii::getAlias('@web') . '/css/login.css');
+$this->title = 'Đăng nhập Admin';
 ?>
-<div class="site-login">
-    <div class="mt-5 offset-lg-3 col-lg-6">
-        <h1><?= Html::encode($this->title) ?></h1>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-7 col-lg-5">
+					<div class="login-wrap p-4 p-md-5">
+		      	<div class="icon d-flex align-items-center justify-content-center">
+                  <i class="ri-account-circle-line text-white"></i>
+		      	</div>
+                    <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
+                    <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-        <p>Please fill out the following fields to login:</p>
+                        <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Tên đăng nhập') ?>
 
-        <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+                        <?= $form->field($model, 'password')->passwordInput()->label('Mật khẩu') ?>
 
-            <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                        <?= $form->field($model, 'rememberMe')->checkbox()->label('Lưu đăng nhập') ?>
 
-            <?= $form->field($model, 'password')->passwordInput() ?>
+                        <div class="form-group">
+                            <?= Html::submitButton('Đăng nhập', ['class' => 'btn btn-primary btn-block', 'name' => 'login-button']) ?>
+                        </div>
 
-            <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-            <div class="form-group">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary btn-block', 'name' => 'login-button']) ?>
+                    <?php ActiveForm::end(); ?>
+                </div>
             </div>
-
-        <?php ActiveForm::end(); ?>
-    </div>
-</div>
+    </section>
