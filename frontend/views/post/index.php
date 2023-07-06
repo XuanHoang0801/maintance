@@ -41,6 +41,8 @@ $backend = BackendAsset::register($this);
                               </div>
                            </div>
                         </div>
+                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                           type="submit">Search</button>
                      </form>
                   </aside>
                   <aside class="single_sidebar_widget post_category_widget">

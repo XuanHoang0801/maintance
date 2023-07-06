@@ -14,7 +14,7 @@ class PostController extends \yii\web\Controller
     {
         $model = Post::find()->where(['slug' => $slug])->one();
         $category = Category::find()->where(['is_show' => 1])->all();
-        $relate =  Post::find()->where(['!=','id', $model->id])->andWhere(['category_id' => $model->category_id])->andWhere(['is_show' => 1])->orderBy(['id' => SORT_DESC])->all();
+        $relate =  Post::find()->where(['!=','id', $model->id])->orderBy(['id' => SORT_DESC])->all();
         return $this->render('index',[
             'model' => $model,
             'category' => $category,
