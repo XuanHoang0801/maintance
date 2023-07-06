@@ -5,6 +5,7 @@ namespace frontend\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\models\Post;
+use Yii;
 
 /**
  * PostSearch represents the model behind the search form of `frontend\models\Post`.
@@ -41,7 +42,7 @@ class PostSearch extends Post
      */
     public function search($params)
     {
-        $query = Post::find();
+        $query = Post::find()->where(['author_id' => Yii::$app->user->id]);
 
         // add conditions that should always apply here
 

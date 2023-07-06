@@ -12,8 +12,8 @@ $this->title = $cat->name
 ?>
 <div class="row d-flex justify-content-between mt-3">
     <div class="col-lg-3 col-md-3">
-        <div class="section-tittle mb-30">
-            <h3><?=  $cat->name ?></h3>
+        <div class="trending-tittle">
+            <strong><?=  $cat->name ?></strong>   
         </div>
     </div>
 </div>
@@ -27,7 +27,7 @@ $this->title = $cat->name
                         <img src="<?= $backend->baseUrl.'/'.$list->image ?>" alt="">
                     </div>
                     <div class="trend-bottom-cap">
-                        <span class="color1"><?= $list->category->name ?></span>
+                        <!-- <span class="color1"><?= $list->category->name ?></span> -->
                         <h4 class="mt-3"><a href="/bai-viet/<?= $list->slug ?>.html"><?= $list->title ?></a></h4>
 
                         <?php 

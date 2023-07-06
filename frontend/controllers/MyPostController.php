@@ -57,9 +57,11 @@ class MyPostController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = $this->findModel($id);
+        // return $this->render('view', [
+        //     'model' => $this->findModel($id),
+        // ]);
+        return $this->redirect('/bai-viet/'.$model->slug.'.html');
     }
 
     /**
@@ -89,7 +91,7 @@ class MyPostController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->renderAjax('create', [
+        return $this->render('create', [
             'model' => $model,
         ]);
     }
