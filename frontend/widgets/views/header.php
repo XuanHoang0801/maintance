@@ -1,10 +1,9 @@
 <?php
+
+use frontend\models\Category;
 use yii\helpers\Html;
 use yii\helpers\Url; 
-use backend\models\Setting;
-use frontend\models\Category;
-use frontend\assets\BackendAsset;
-$backend = BackendAsset::register($this);
+
 ?>
 <header>
         <!-- Header Start -->
@@ -29,9 +28,8 @@ $backend = BackendAsset::register($this);
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item" href="thong-tin">Thông tin</a>
                                                 <a class="dropdown-item" href="/change-password">Đổi mật khẩu</a>
-                                                <a class="dropdown-item" href="/lich-su-mua">Lịch sử mua</a>
                                                 <a class="dropdown-item" href="/my-post">Bài viết của tôi</a>
-                                                <a class="dropdown-item" href="/nap-xu">Nạp xu</a>
+                                                <a class="dropdown-item" href="#">Nạp xu</a>
                                                 <a class="dropdown-item text-warning" href="#">Xu: <?= Yii::$app->user->identity->coin ?> xu </a>
                                                 <?php
                                                         echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
@@ -50,31 +48,60 @@ $backend = BackendAsset::register($this);
                    </div>
                 </div>
                 <div class="header-mid d-none d-md-block">
-                   <div class="container d-flex justify-content-between">
-                        <div class="logo  col-md-3">
-                            <a href="/">
-                                <img src="<?= $backend->baseUrl.'/'.Setting::logo()->content ?>" alt="" width="50%">
-                                <p><?= Setting::title()->content ?></p>
-                            </a>
+                   <div class="container">
+                        <div class="row d-flex align-items-center">
+                            <!-- Logo -->
+                            <div class="col-xl-3 col-lg-3 col-md-3">
+                                <div class="logo">
+                                    <a href="/"><img src="/img/logo/logo.png" alt=""></a>
+                                </div>
+                            </div>
+                            <!-- <div class="col-xl-9 col-lg-9 col-md-9">
+                                <div class="header-banner f-right ">
+                                    <img src="assets/img/hero/header_card.jpg" alt="">
+                                </div>
+                            </div> -->
                         </div>
-                        <!-- Main-menu -->
-                        <div class="main-menu d-none d-md-block d-flex">
-                            <nav>                  
-                                <ul id="navigation">    
-                                    <li><a href="/">Trang chủ</a></li>
-                                    <?php foreach(Category::find()->where(['is_show' => 1])-> all() as $cat) : ?>
-                                    <li><a href="/<?= $cat->slug ?>"><?= $cat->name?></a></li>
-                                    <?php endforeach ?>
-                                </ul>
-                            </nav>
-                        </div>
-                                
-                        <!-- <div class=" main-menu d-none d-md-flex">
-                            <input class="form-control" type="text" placeholder="Tìm kiếm..." aria-label="default input example">
-                            <i class="fas fa-search special-tag"></i>
-                        </div> -->
-                    </div>
+                   </div>
                 </div>
+               <div class="header-bottom header-sticky">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-xl-10 col-lg-10 col-md-12 header-flex">
+                                <!-- sticky -->
+                                    <div class="sticky-logo">
+                                        <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                                    </div>
+                                <!-- Main-menu -->
+                                <div class="main-menu d-none d-md-block">
+                                    <nav>                  
+                                        <ul id="navigation">    
+                                            <li><a href="/">Trang chủ</a></li>
+                                            <?php foreach(Category::find()->where(['is_show' => 1])-> all() as $cat) : ?>
+                                            <li><a href="/<?= $cat->slug ?>"><?= $cat->name?></a></li>
+                                            <?php endforeach ?>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>             
+                            <div class="col-xl-2 col-lg-2 col-md-4">
+                                <div class="header-right-btn f-right d-none d-lg-block">
+                                    <i class="fas fa-search special-tag"></i>
+                                    <div class="search-box">
+                                        <form action="#">
+                                            <input type="text" placeholder="Search">
+                                            
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Mobile Menu -->
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-md-none"></div>
+                            </div>
+                        </div>
+                    </div>
+               </div>
             </div>
        </div>
         <!-- Header End -->

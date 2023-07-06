@@ -26,7 +26,16 @@ $this->params['breadcrumbs'][] = 'my-post';
         <?php //echo Html::button(Yii::t('app', 'Tạo bài viết mới'), ['value'=> Url::to('/my-post/create'),'class' => 'btn btn-success']) ?>
     </p>
 
-    
+    <?php
+    // Modal::begin([
+    //     'title' => '<h4>Post</h4>',
+    //     'id' => 'modal',
+    //     'size' => 'modal-lg',
+    // ]);
+
+    // echo "<div id='modalContent'></div>";
+    // Modal::end();
+    ?>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
     <?php Pjax::begin() ?>
@@ -62,7 +71,7 @@ $this->params['breadcrumbs'][] = 'my-post';
             //'updated_at',
             [
                 'class' => ActionColumn::className(),
-                'template' => ' {view}{update} {delete}',
+                'template' => ' {update} {delete}',
                 'urlCreator' => function ($action, Post $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }

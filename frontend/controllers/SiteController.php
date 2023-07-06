@@ -13,7 +13,6 @@ use yii\filters\AccessControl;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use frontend\models\CustomerSignup;
-use frontend\models\LoadCard;
 use frontend\models\VerifyEmailForm;
 use yii\web\BadRequestHttpException;
 use frontend\models\ResetPasswordForm;
@@ -37,7 +36,7 @@ class SiteController extends Controller
                 'only' => ['logout', 'signup'],
                 'rules' => [
                     [
-                        'actions' => ['signup','captcha'],
+                        'actions' => ['signup'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -47,18 +46,6 @@ class SiteController extends Controller
                         'roles' => ['@'],
                     ],
                 ],
-                // 'rules' => [
-                //     [
-                //         'actions' => ['login','captcha'],
-                //         'allow' => true,  
-                //     ],
-                //     [
-                //         'actions' => ['logout','index'],
-                //         'allow' => true,
-                //         'roles' => ['@'],
-                //     ],
-                    
-                // ],
             ],
             'verbs' => [
                 'class' => VerbFilter::class,
@@ -79,10 +66,8 @@ class SiteController extends Controller
                 'class' => \yii\web\ErrorAction::class,
             ],
             'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-    //                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-                'minLength' => 3,
-                'maxLength' => 5,
+                'class' => \yii\captcha\CaptchaAction::class,
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
     }
@@ -94,8 +79,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $hot = Post::find()->where(['is_free' => 1])->andWhere(['is_hot' => 1])->andWhere(['is_show'=>1])->orderBy(['id' => SORT_DESC])->all();
-        $charge = Post::find()->where(['is_free' => 0])->andWhere(['!=', 'author_id',Yii::$app->user->id])->andWhere(['is_show'=>1])->orderBy(['id' => SORT_DESC])->all();
+        $hot = Post::find()->where(['is_free' => 1])->andWhere(['is_hot' => 1])->orderBy(['id' => SORT_DESC])->all();
+        $charge = Post::find()->where(['is_free' => 0])->orderBy(['id' => SORT_DESC])->all();
         return $this->render('index',[
             'hot' =>$hot,
             'charge' => $charge
@@ -119,7 +104,7 @@ class SiteController extends Controller
         }
 
         $model->password = '';
-        Yii::$app->session->setFlash('warning', "Vui lòng đăng nhập!");
+
         return $this->render('login', [
             'model' => $model,
         ]);
@@ -330,42 +315,5 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionLoadCard(){
-        $customer = new LoadCard();
-        $model = Customer::find()->where(['id' => Yii::$app->user->id])->one();
-
-        if($this->request->isPost){
-            if ($customer->load($this->request->post())) {
-                $model->coin = $model->coin + $customer->coin;
-                if($model->save(false)){
-                    Yii::$app->session->setFlash('success', "Nạp xu thành công!");
-                }
-                else{
-                    Yii::$app->session->setFlash('error', "Nạp xu thất bại!");
-
-                }
-                return $this->redirect('/nap-xu');
-            }
-        }
-        return $this->render('load-card',[
-            'customer' => $customer,
-            'model'=>$model
-        ]);
-
-    }
-
-    public function actionSearch($key){
-        $model = Post::find()
-                ->where(['is_show' => 1])
-                ->andFilterWhere(['like', 'title', $key])
-                ->orderBy(['id' => SORT_DESC])->all();
-        if(!$model){
-            Yii::$app->session->setFlash('error', "Không có bài viết nào phù hợp với từ khóa tìm kiếm!");
-        }
-        return $this->render('search', [
-            'model' => $model,
-            'key' =>$key
-        ]);
-    }
     
 }

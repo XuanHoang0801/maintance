@@ -1,9 +1,8 @@
 <?php
 
-use frontend\assets\BackendAsset;
 use backend\models\Setting;
 use frontend\models\Category;
-$backend = BackendAsset::register($this);
+
 ?>
  <!-- ======= Footer ======= -->
  <footer id="footer" class="footer">
@@ -14,8 +13,8 @@ $backend = BackendAsset::register($this);
     <div class="row g-5">
       <div class="col-lg-4">
         <h3 class="footer-heading"><?= Setting::widgetOne()->content ?></h3>
-        <img src="<?= $backend->baseUrl ?>/<?= Setting::logo()->content?>" width="100rem">
-        <p class="mt-3"><?= Setting::title()->content ?></p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam ab, perspiciatis beatae autem deleniti voluptate nulla a dolores, exercitationem eveniet libero laudantium recusandae officiis qui aliquid blanditiis omnis quae. Explicabo?</p>
+        <p><a href="about.html" class="footer-link-more">Learn More</a></p>
       </div>
       <div class="col-6 col-lg-2">
         <h3 class="footer-heading"><?= Setting::widgetTwo()->content ?></h3>
@@ -41,7 +40,7 @@ $backend = BackendAsset::register($this);
         </ul>
       </div>
 
-      <!-- <div class="col-lg-4">
+      <div class="col-lg-4">
         <h3 class="footer-heading">Recent Posts</h3>
 
         <ul class="footer-links footer-blog-entry list-unstyled">
@@ -87,19 +86,38 @@ $backend = BackendAsset::register($this);
 
         </ul>
 
-      </div> -->
+      </div>
     </div>
   </div>
 </div>
 
-<div class="footer-legal bg-secondary mt-3 p-3">
+<div class="footer-legal">
   <div class="container">
 
-    <div class="row justify-content-between ">
+    <div class="row justify-content-between">
       <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-        <div class="copyright text-white ">
+        <div class="copyright">
             <?= Setting::copyRight()->content ?>
         </div>
+
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
+        </div>
+
+      </div>
+
+      <div class="col-md-6">
+        <div class="social-links mb-3 mb-lg-0 text-center text-md-end">
+          <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
+          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        </div>
+
       </div>
 
     </div>

@@ -45,9 +45,6 @@ return [
                 'signup' => 'site/signup',
                 'change-password' => 'site/change-password',
                 'thong-tin' => 'site/info',
-                'nap-xu' =>'site/load-card',
-                'lich-su-mua' => '/history/index',
-                'tim-kiem' => '/site/search',
 
                 'my-post/trang-<page:\d+>' => 'my-post/index',
                 'my-post/<id:\d+>'=>'my-post/view',
