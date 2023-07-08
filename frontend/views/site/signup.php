@@ -24,7 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'email') ?>
                 <?= $form->field($model, 'fullname') ?>
-                <?= $form->field($model, 'birthday') ?>
                 <?= '<label class="form-label">Birthday</label>'; ?>
                 <?= 
                     DatePicker::widget([

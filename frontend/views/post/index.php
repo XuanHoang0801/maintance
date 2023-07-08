@@ -1,8 +1,9 @@
 <?php
 /** @var yii\web\View $this */
 
-use frontend\assets\BackendAsset;
 use yii\helpers\BaseUrl;
+use yii\widgets\ActiveForm;
+use frontend\assets\BackendAsset;
 
 $this->title = $model->title;
 $backend = BackendAsset::register($this);
@@ -31,17 +32,19 @@ $backend = BackendAsset::register($this);
             <div class="col-lg-4">
                <div class="blog_right_sidebar">
                   <aside class="single_sidebar_widget search_widget">
-                     <form action="#">
-                        <div class="form-group">
-                           <div class="input-group mb-3">
-                              <input type="text" class="form-control" placeholder='Search Keyword'
-                                 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
-                              <div class="input-group-append">
-                                 <button class="btns" type="button"><i class="ti-search"></i></button>
-                              </div>
-                           </div>
-                        </div>
-                     </form>
+                  <?php $form = ActiveForm::begin([
+                                                                    'action' => '/tim-kiem',
+                                                                    'method' => 'get',
+                                                                ]); ?>
+                                    <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="key" placeholder='Nhập từ khóa tìm kiếm...' required>
+                                        <div class="input-group-append">
+                                            <button class="btns" type="submit"><i class="ti-search"></i></button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                <?php ActiveForm::end(); ?>
                   </aside>
                   <aside class="single_sidebar_widget post_category_widget">
                      <h4 class="widget_title">Thể loại</h4>

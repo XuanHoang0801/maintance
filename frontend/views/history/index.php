@@ -30,9 +30,6 @@ $this->title = 'Lịch sửa mua';
 
                             <p class = text-danger><?=$list->post->coin?> xu</p>
                             <p class = "text-primary">Đã mua</p>
-                      
-                            <a name="" id="" class="btn btn-danger" href="/bai-viet/<?=$list->post->slug?>.html" role="button">Chi tiết</a>
-
                     </div>
                 </div>
                 

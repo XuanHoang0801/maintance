@@ -10,6 +10,7 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language'=>'vi', // tiếng việt
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
@@ -44,7 +45,7 @@ return [
                 'login' => 'site/login',
                 'signup' => 'site/signup',
                 'change-password' => 'site/change-password',
-                'thong-tin' => 'site/info',
+                'thong-tin' => 'customer/info',
                 'nap-xu' =>'site/load-card',
                 'lich-su-mua' => '/history/index',
                 'tim-kiem' => '/site/search',
@@ -80,6 +81,19 @@ return [
         //     'baseUrl' => 'backend/web/uploads/',
         //     'enablePrettyUrl' => true,
         //     'showScriptName' => false,
+        // ],
+        // 'i18n' => [
+        //     'translations' => [
+        //         'app' => [
+        //             'class' => 'yii\i18n\PhpMessageSource',
+        //             // 'basePath' => '@app/messages',
+        //             'sourceLanguage' => 'vi',
+        //             'fileMap' => [
+        //                 'app' => 'app.php',
+        //                 'app/error' => 'error.php',
+        //             ],
+        //         ],
+        //     ],
         // ],
     ],
     'params' => $params,

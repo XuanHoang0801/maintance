@@ -87,7 +87,7 @@ $this->title = Setting::title()->content;
                                             <div class="trand-right-img">
                                                 <img src="<?= $backend->baseUrl.'/'.$chargeItem->image ?>" alt="" width="100px">
                                             </div>
-                                            <h4><a href="/bai-viet/<?= $chargeItem->slug ?>.html"><?= $chargeItem->title ?></a></h4>
+                                            <h4><?= $chargeItem->title ?></h4>
                                         </div>
                                         <div class="text-end">
 

@@ -46,7 +46,7 @@ use dosamigos\ckeditor\CKEditor;
 
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success mt-3']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Lưu bài viết'), ['class' => 'btn btn-success mt-3']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

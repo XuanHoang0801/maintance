@@ -85,7 +85,7 @@ class Post extends \yii\db\ActiveRecord
             'slug' => Yii::t('app', 'Slug'),
             'short' => Yii::t('app', 'Tóm tắt'),
             'detail' => Yii::t('app', 'Chi tiết'),
-            'category_id' => Yii::t('app', 'Category ID'),
+            'category_id' => Yii::t('app', 'Chuyên mục'),
             'author_id' => Yii::t('app', 'Author ID'),
             'is_hot' => Yii::t('app', 'Nổi bật'),
             'is_show' => Yii::t('app', 'Xuất bản'),

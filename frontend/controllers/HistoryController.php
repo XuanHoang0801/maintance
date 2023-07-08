@@ -19,7 +19,7 @@ class HistoryController extends \yii\web\Controller
             ]);
         }
         else{
-            Yii::$app->session->setFlash('warning', "Bạn chưa nua bài viết nào!");
+            Yii::$app->session->setFlash('warning', "Bạn chưa mua bài viết nào!");
 
             return $this->render('index',[
                 'model' => $model

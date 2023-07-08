@@ -36,7 +36,7 @@ $this->title = 'Thông tin';
               <ul class="nav nav-tabs nav-tabs-bordered" role="tablist">
 
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview" aria-selected="true" role="tab">Chi tiết</button>
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview" aria-selected="true" role="tab"><?= $this->title ?></button>
                 </li>
 
               </ul>

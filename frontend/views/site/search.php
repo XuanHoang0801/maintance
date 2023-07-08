@@ -3,8 +3,9 @@
 
 use yii\helpers\Html;
 use yii\web\YiiAsset;
-use frontend\assets\BackendAsset;
+use yii\widgets\ActiveForm;
 use frontend\models\PostBuy;
+use frontend\assets\BackendAsset;
 
 $this->registerJsFile('@web/js/popup.js', ['depends' =>  [yii\web\YiiAsset::className()], ]);
 $backend = BackendAsset::register($this);
@@ -15,6 +16,21 @@ $this->title = 'Kết quả tìm kiếm của: "'.$key."";
         <div class="trending-tittle">
         Kết quả tìm kiếm của: "<?=  $key ?>" 
         </div>
+        <aside class="single_sidebar_widget search_widget">
+            <?php $form = ActiveForm::begin([
+                                                'action' => 'tim-kiem',
+                                                'method' => 'get',
+                                            ]); ?>
+                <div class="form-group">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="key" placeholder='Nhập từ khóa tìm kiếm...' required>
+                    <div class="input-group-append">
+                        <button class="btns bg-warning" type="submit"><i class="ti-search "></i></button>
+                    </div>
+                </div>
+                </div>
+            <?php ActiveForm::end(); ?>
+        </aside>
     </div>
 </div>
 
@@ -28,7 +44,7 @@ $this->title = 'Kết quả tìm kiếm của: "'.$key."";
                     </div>
                     <div class="trend-bottom-cap">
                         <!-- <span class="color1"><?= $list->category->name ?></span> -->
-                        <h4 class="mt-3"><a href="/bai-viet/<?= $list->slug ?>.html"><?= $list->title ?></a></h4>
+                        <h4 class="mt-3"><?= $list->title ?></h4>
 
                         <?php 
                             if($list->author_id == Yii::$app->user->id ){
