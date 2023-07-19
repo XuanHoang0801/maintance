@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use app\models\Post;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 use yii\filters\VerbFilter;
@@ -55,12 +56,14 @@ class PostController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+    // public function actionView($id)
+    // {
+    //     $model = $this->findModel($id);
+    //     // return $this->render('view', [
+    //     //     'model' => $this->findModel($id),
+    //     // ]);
+    //     return $this->redirect(Url::toRoute('../bai-viet/'.$model->slug.'.html'));
+    // }
 
     /**
      * Creates a new Post model.
@@ -106,9 +109,10 @@ class PostController extends Controller
         if ($this->request->isPost && $model->load($this->request->post())) {
             $model->image = UploadedFile::getInstance($model, 'image');
             if($model->image != null){
-                $fileName = $model->slug . '.' . $model->image->extension;
+                $fileName = $model->slug .'-'.date('mdYhis'). '.' . $model->image->extension;
                 $model->image->saveAs('uploads/' .$fileName ); // lưu ảnh vào thư mục uploads
                 $model->image = $fileName; // lưu vào database
+                unlink('uploads/'.$image);
             }
             else{
                 $model->image = $image;

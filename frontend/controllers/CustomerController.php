@@ -78,11 +78,15 @@ class CustomerController extends Controller
                     $fileName = $model->username.'-'.date('Ymdhis') . '.' . $model->avt->extension;
                     $model->avt->saveAs(Yii::getAlias('@backend/web/uploads/').$fileName ); // lưu ảnh vào thư mục uploads
                     $model->avt = $fileName; // lưu vào database
+                    if($avt != 'user.png'){
+                        unlink(Yii::getAlias('@backend/web/uploads/').$avt);
+                    }
                 }
                 else{
                     $model->avt = $avt;
                 }
                 $model->save();   
+                
                 
                 return $this->redirect(['info']);
             }

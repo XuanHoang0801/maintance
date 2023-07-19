@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
             'options' => ['multiple' => false,'accept' => 'image/*'],
             'pluginOptions' => [
                 'initialPreview'=>[
-                    Html::img( Url::toRoute('/uploads').'/' . $model->image,['width' => '70%'])
+                    Html::img( Url::toRoute('/uploads').'/' . $model->content,['width' => '70%'])
                 ],
                 'overwriteInitial'=>false,
                 'browseClass' => 'btn btn-success',

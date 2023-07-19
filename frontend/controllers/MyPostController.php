@@ -83,7 +83,7 @@ class MyPostController extends Controller
                     $model->image = 'image.png';
                 }
                 else{
-                    $fileName = $model->slug . '.' . $image->extension;
+                    $fileName = $model->slug . '-'.date('dmYhis'). '.' . $image->extension;
                     $image->saveAs(Yii::getAlias('@backend/web/uploads/') .$fileName ); // lưu ảnh vào thư mục uploads
                     $model->image = $fileName; // lưu vào database
                 }
@@ -114,15 +114,17 @@ class MyPostController extends Controller
         if ($this->request->isPost && $model->load($this->request->post())) {
             if($model->image){
                 $model->image = UploadedFile::getInstance($model, 'image');
-                $fileName = $model->slug . '.' . $model->image->extension;
-                $model->image->saveAs('@backend/web/uploads/' .$fileName ); // lưu ảnh vào thư mục uploads
+                $fileName = $model->slug .date('dmYhis'). '.' . $model->image->extension;
+                $model->image->saveAs(Yii::getAlias('@backend/web/uploads/' .$fileName )); // lưu ảnh vào thư mục uploads
                 $model->image = $fileName; // lưu vào database
+                unlink(Yii::getAlias('@backend/web/uploads/'.$image));
             }
             else{
                 $model->image = $image;
             }
                 $model->author_id = Yii::$app->user->id;
                 $model->save();
+
     
                 return $this->redirect(['view', 'id' => $model->id]);
         }

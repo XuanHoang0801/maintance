@@ -6,10 +6,10 @@ use yii\helpers\Html;
 /** @var backend\models\Setting $model */
 
 $this->title = Yii::t('app', 'Update Setting: {name}', [
-    'name' => $model->id,
+    'name' => $model->key,
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Settings'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->key, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="setting-update">

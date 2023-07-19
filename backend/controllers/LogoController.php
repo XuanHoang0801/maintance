@@ -104,17 +104,24 @@ class LogoController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $logo = $model->content;
         if ($this->request->isPost && $model->load($this->request->post())) {
             $model->content = UploadedFile::getInstance($model, 'content');
-            $fileName = $model->key . '.' . $model->content->extension;
-            $model->content->saveAs('uploads/' .$fileName ); // lưu ảnh vào thư mục uploads
-
+            if($model->content){
+                $fileName = $model->key .date('dmYhis'). '.' . $model->content->extension;
+                $model->content->saveAs(Yii::getAlias('@backend/web/uploads/' .$fileName )); // lưu ảnh vào thư mục uploads
+                $model->content = $fileName; // lưu vào database
+                if($logo != null){
+                    unlink(Yii::getAlias('@backend/web/uploads/' .$logo ));
+                }
+            }
+            else{
+                $model->content = $logo;
+            }
             $model->updated_by = Yii::$app->user->id;
-            $model->content = $fileName; // lưu vào database
             $model->save();
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         }
 
         return $this->render('update', [
