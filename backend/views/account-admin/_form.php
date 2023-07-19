@@ -1,6 +1,8 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
+use kartik\file\FileInput;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
@@ -18,7 +20,20 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'status')->textInput() ?>
 
-    <?= $form->field($model, 'avt')->textInput(['maxlength' => true]) ?>
+    <?=
+         $form->field($model, 'avt')->widget(FileInput::classname(), [
+            'options' => ['multiple' => false,'accept' => 'image/*'],
+            'pluginOptions' => [
+                'initialPreview'=>[
+                    Html::img( Url::toRoute('/uploads').'/' . $model->avt,['width' => '70%'])
+                ],
+                'overwriteInitial'=>false,
+                'browseClass' => 'btn btn-success',
+                'showUpload' => false,
+                'removeClass' => 'btn btn-danger',
+            ]
+        ]);
+    ?>
 
     <?= $form->field($model, 'coin')->textInput(['maxlength' => true]) ?>
 

@@ -2,11 +2,12 @@
 
 namespace backend\controllers;
 
-use app\models\Customer;
-use backend\models\CustomerSearch;
+use Yii;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use app\models\Customer;
 use yii\filters\VerbFilter;
+use backend\models\CustomerSearch;
+use yii\web\NotFoundHttpException;
 
 /**
  * AccountCustomerController implements the CRUD actions for Customer model.

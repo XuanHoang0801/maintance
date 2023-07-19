@@ -8,6 +8,7 @@ use yii\bootstrap5\Html;
 use common\widgets\Alert;
 use yii\bootstrap5\NavBar;
 use backend\assets\AppAsset;
+use backend\models\Setting;
 use yii\bootstrap5\Breadcrumbs;
 use backend\widgets\FooterWidget;
 use backend\widgets\HeaderWidget;
@@ -21,6 +22,7 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <?php $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '/uploads/'.Setting::Logo()->content]); ?>
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>

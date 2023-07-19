@@ -1,8 +1,9 @@
 <?php
 
-use frontend\assets\BackendAsset;
+use yii\helpers\Url;
 use backend\models\Setting;
 use frontend\models\Category;
+use frontend\assets\BackendAsset;
 $backend = BackendAsset::register($this);
 ?>
  <!-- ======= Footer ======= -->
@@ -14,19 +15,19 @@ $backend = BackendAsset::register($this);
     <div class="row g-5">
       <div class="col-lg-4">
         <h3 class="footer-heading"><?= Setting::widgetOne()->content ?></h3>
-        <img src="<?= $backend->baseUrl ?>/<?= Setting::logo()->content?>" width="100rem">
+        <a href="<?= Url::toRoute('/') ?>"><img src="<?= $backend->baseUrl ?>/<?= Setting::logo()->content?>" width="100rem"></a>
         <p class="mt-3"><?= Setting::title()->content ?></p>
       </div>
       <div class="col-6 col-lg-2">
         <h3 class="footer-heading"><?= Setting::widgetTwo()->content ?></h3>
         <ul class="footer-links list-unstyled">
           <?php foreach(Category::getAll() as $category): ?>
-          <li><a href="/<?= $category->slug ?>"><i class="bi bi-chevron-right"></i> <?= $category->name ?></a></li>
+          <li><a href="<?=Url::toRoute("/".$category->slug, true) ?>"><i class="bi bi-chevron-right"></i> <?= $category->name ?></a></li>
           <?php endforeach ?>
           
         </ul>
       </div>
-      <div class="col-6 col-lg-2">
+      <!-- <div class="col-6 col-lg-2">
         <h3 class="footer-heading"><?= Setting::widgetThree()->content ?></h3>
         <ul class="footer-links list-unstyled">
           <li><a href="category.html"><i class="bi bi-chevron-right"></i> Business</a></li>
@@ -39,7 +40,7 @@ $backend = BackendAsset::register($this);
           <li><a href="category.html"><i class="bi bi-chevron-right"></i> Travel</a></li>
 
         </ul>
-      </div>
+      </div> -->
 
       <!-- <div class="col-lg-4">
         <h3 class="footer-heading">Recent Posts</h3>

@@ -10,7 +10,7 @@ $backend = BackendAsset::register($this);
         <!-- Header Start -->
        <div class="header-area">
             <div class="main-header ">
-                <div class="header-top black-bg d-none d-md-block">
+                <div class="header-top black-bg d-md-block">
                    <div class="container">
                        <div class="col-xl-12">
                             <div class=" d-flex justify-content-end align-items-center">
@@ -27,15 +27,15 @@ $backend = BackendAsset::register($this);
                                                 <?= Yii::$app->user->identity->username ?>
                                             </div>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="thong-tin">Thông tin</a>
-                                                <a class="dropdown-item" href="/change-password">Đổi mật khẩu</a>
-                                                <a class="dropdown-item" href="/lich-su-mua">Lịch sử mua</a>
-                                                <a class="dropdown-item" href="/my-post">Bài viết của tôi</a>
-                                                <a class="dropdown-item" href="/nap-xu">Nạp xu</a>
+                                                <a class="dropdown-item" href="<?= Url::toRoute('/thong-tin', true) ?>">Thông tin</a>
+                                                <a class="dropdown-item" href="<?= Url::toRoute('/doi-mat-khau', true) ?>">Đổi mật khẩu</a>
+                                                <a class="dropdown-item" href="<?= Url::toRoute('/lich-su-mua', true) ?>">Lịch sử mua</a>
+                                                <a class="dropdown-item" href="<?= Url::toRoute('/my-post', true) ?>">Bài viết của tôi</a>
+                                                <a class="dropdown-item" href="<?= Url::toRoute('/nap-xu', true) ?>">Nạp xu</a>
                                                 <a class="dropdown-item text-warning" href="#">Xu: <?= Yii::$app->user->identity->coin ?> xu </a>
                                                 <?php
                                                         echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
-                                                    . Html::submitButton( 'Đăng xuất',['class' => ' btn-link logout text-decoration-none'])
+                                                    .'<input class="dropdown-item text-primary" type="submit" value="Đăng xuất">'
                                                     . Html::endForm();
                                                 ?>
                                             </div>
@@ -49,30 +49,25 @@ $backend = BackendAsset::register($this);
                        </div>
                    </div>
                 </div>
-                <div class="header-mid d-none d-md-block">
-                   <div class="container d-flex justify-content-between">
+                <div class="header-mid  d-md-block">
+                   <div class="header-body container d-flex justify-content-between">
                         <div class="logo  col-md-3">
-                            <a href="/">
+                            <a href="<?= Url::toRoute('/', true) ?>">
                                 <img src="<?= $backend->baseUrl.'/'.Setting::logo()->content ?>" alt="" width="50%">
                                 <p><?= Setting::title()->content ?></p>
                             </a>
                         </div>
                         <!-- Main-menu -->
-                        <div class="main-menu d-none d-md-block d-flex">
+                        <div class="main-menu d-md-block d-flex">
                             <nav>                  
                                 <ul id="navigation">    
-                                    <li><a href="/">Trang chủ</a></li>
+                                    <li><a href="<?= Url::toRoute('/') ?>">Trang chủ</a></li>
                                     <?php foreach(Category::find()->where(['is_show' => 1])-> all() as $cat) : ?>
-                                    <li><a href="/<?= $cat->slug ?>"><?= $cat->name?></a></li>
+                                    <li><a href="<?= Url::toRoute('/'.$cat->slug) ?>"><?= $cat->name?></a></li>
                                     <?php endforeach ?>
                                 </ul>
                             </nav>
                         </div>
-                                
-                        <!-- <div class=" main-menu d-none d-md-flex">
-                            <input class="form-control" type="text" placeholder="Tìm kiếm..." aria-label="default input example">
-                            <i class="fas fa-search special-tag"></i>
-                        </div> -->
                     </div>
                 </div>
             </div>

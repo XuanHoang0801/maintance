@@ -1,6 +1,7 @@
 <?php
 /** @var yii\web\View $this */
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
 use yii\widgets\ActiveForm;
@@ -18,7 +19,7 @@ $this->title = 'Kết quả tìm kiếm của: "'.$key."";
         </div>
         <aside class="single_sidebar_widget search_widget">
             <?php $form = ActiveForm::begin([
-                                                'action' => 'tim-kiem',
+                                               'action' => Url::toRoute('/tim-kiem', true),
                                                 'method' => 'get',
                                             ]); ?>
                 <div class="form-group">
@@ -40,7 +41,7 @@ $this->title = 'Kết quả tìm kiếm của: "'.$key."";
             <div class="col-lg-4">
                 <div class="single-bottom mb-35">
                     <div class="trend-bottom-img mb-30">
-                        <img src="<?= $backend->baseUrl.'/'.$list->image ?>" alt="">
+                        <img class= "img" src="<?= $backend->baseUrl.'/'.$list->image ?>" alt="">
                     </div>
                     <div class="trend-bottom-cap">
                         <!-- <span class="color1"><?= $list->category->name ?></span> -->

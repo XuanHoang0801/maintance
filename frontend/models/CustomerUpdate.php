@@ -44,6 +44,7 @@ class CustomerUpdate extends \yii\db\ActiveRecord
         return [
             [['username', 'fullname', 'birthday','email'], 'required'],
             [['username', 'fullname', 'birthday', 'gender', 'email', 'avt'], 'string', 'max' => 255],
+            [['avt'], 'file','skipOnEmpty' => true],
             [['username'], 'unique'],
             [['email'], 'unique'],
         ];
@@ -65,7 +66,7 @@ class CustomerUpdate extends \yii\db\ActiveRecord
             'password_reset_token' => 'Password Reset Token',
             'email' => 'Email',
             'status' => 'Status',
-            'avt' => 'Avt',
+            'avt' => 'Ảnh đại diện',
             'coin' => 'Coin',
             'type' => 'Type',
             'created_at' => 'Created At',

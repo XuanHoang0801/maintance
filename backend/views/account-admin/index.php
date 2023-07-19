@@ -36,8 +36,16 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'password_reset_token',
             'email:email',
             //'status',
-            'avt',
-            'coin',
+            [
+                'attribute'=> 'avt',
+                'format' => ['image',['width'=>'50']], 
+                'options' => ['style' => 'width:10%'],
+
+                'value' => function($model){
+                    return  Url::toRoute('/uploads/'.$model->avt);
+                },
+            ],
+            // 'coin',
             //'type:boolean',
             //'created_at',
             //'updated_at',

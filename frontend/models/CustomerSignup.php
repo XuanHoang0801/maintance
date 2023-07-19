@@ -5,6 +5,7 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use common\models\User;
+use yii\web\UploadedFile;
 use common\models\Customer;
 
 /**
@@ -18,7 +19,7 @@ class CustomerSignup extends Model
     public $fullname;
     public $birthday;
     public $gender;
-    // public $avt;
+    public $avt;
 
 
     /**
@@ -38,6 +39,19 @@ class CustomerSignup extends Model
             ['email', 'unique', 'targetClass' => '\common\models\Customer   ', 'message' => 'This email address has already been taken.'],
 
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'username' => Yii::t('app', 'Tên đăng nhập'),
+            'email' => Yii::t('app', 'Email'),
+            'password' => Yii::t('app', 'Mật khẩu'),
+            'fullname' => Yii::t('app', 'Họ tên'),
+            'birthday' => Yii::t('app', 'Ngày sinh'),
+            'gender' => Yii::t('app', 'Giới tính'),
+            'avt' => Yii::t('app', 'Ảnh đại diện'),
         ];
     }
 
@@ -61,6 +75,16 @@ class CustomerSignup extends Model
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
+
+        $image = UploadedFile::getInstance($user, 'avt');
+                if(!$image){
+                    $user->avt = 'user.png';
+                }
+                else{
+                    $fileName = $user->username.'-'.date('dmYhis') . '.' . $image->extension;
+                    $image->saveAs(Yii::getAlias('@backend/web/uploads/') .$fileName ); // lưu ảnh vào thư mục uploads
+                    $user->avt = $fileName; // lưu vào database
+                }
 
         return $user->save() && $this->sendEmail($user);
     }

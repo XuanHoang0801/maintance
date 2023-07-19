@@ -20,6 +20,7 @@ $this->title = 'Thông tin';
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
+              <!-- <img src="<?= $backend->baseUrl?>/<?= $model->avt ?>" alt="Profile" class="rounded-circle"> -->
               <img src="<?= $backend->baseUrl?>/<?= $model->avt ?>" alt="Profile" class="rounded-circle">
               <h2><?= $model->username ?></h2>
               <h3><?=$model->fullname?></h3>

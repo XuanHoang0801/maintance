@@ -3,7 +3,9 @@
 namespace frontend\controllers;
 
 use Yii;
+use frontend\assets\BackendAsset;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 use yii\filters\VerbFilter;
 use frontend\models\Customer;
 use yii\data\ActiveDataProvider;
@@ -64,10 +66,26 @@ class CustomerController extends Controller
      */
     public function actionUpdate()
     {
+        // $backend = BackendAsset::register($this);
         $model = CustomerUpdate::find()->where(['id' => Yii::$app->user->id ])->one();
+        $avt = $model->avt;
+        if ($this->request->isPost ) {
+            if($model->load($this->request->post())){
+                $model->avt = UploadedFile::getInstance($model, 'avt'); 
+                $fileName = $model->username . '.' . $model->avt->extension;
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['info']);
+                if($model->avt != null){
+                    $fileName = $model->username.'-'.date('Ymdhis') . '.' . $model->avt->extension;
+                    $model->avt->saveAs(Yii::getAlias('@backend/web/uploads/').$fileName ); // lưu ảnh vào thư mục uploads
+                    $model->avt = $fileName; // lưu vào database
+                }
+                else{
+                    $model->avt = $avt;
+                }
+                $model->save();   
+                
+                return $this->redirect(['info']);
+            }
         }
 
         return $this->render('update', [

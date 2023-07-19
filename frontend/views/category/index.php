@@ -1,10 +1,11 @@
 <?php
 /** @var yii\web\View $this */
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
-use frontend\assets\BackendAsset;
 use frontend\models\PostBuy;
+use frontend\assets\BackendAsset;
 
 $this->registerJsFile('@web/js/popup.js', ['depends' =>  [yii\web\YiiAsset::className()], ]);
 $backend = BackendAsset::register($this);
@@ -32,7 +33,7 @@ $this->title = $cat->name
             <div class="col-lg-4">
                 <div class="single-bottom mb-35">
                     <div class="trend-bottom-img mb-30">
-                        <img src="<?= $backend->baseUrl.'/'.$listFree->image ?>" alt="">
+                        <img class= "img" src="<?= $backend->baseUrl.'/'.$listFree->image ?>" alt="">
                     </div>
                     <div class="trend-bottom-cap">
                         <!-- <span class="color1"><?= $listFree->category->name ?></span> -->
@@ -43,9 +44,9 @@ $this->title = $cat->name
                        
                         ?>
                             <p class= "text-warning">Bài viết của tôi</p>  
-                            <a name="" id="" class="btn btn-danger mt-3" href="/bai-viet/<?=$listFree->slug?>.html" role="button">Chi tiết</a>
+                            <a name="" id="" class="btn btn-danger mt-3" href="<?= Url::toRoute('/bai-viet/', true) ?>/<?=$listFree->slug?>.html" role="button">Chi tiết</a>
                         <?php }else{ ?>
-                            <a name="" id="" class="btn btn-danger mt-3" href="/bai-viet/<?=$listFree->slug?>.html" role="button">Chi tiết</a>
+                            <a name="" id="" class="btn btn-danger mt-3" href="<?= Url::toRoute('/bai-viet/', true) ?>/<?=$listFree->slug?>.html" role="button">Chi tiết</a>
                         <?php  }  ?>
 
                     </div>
@@ -66,7 +67,7 @@ $this->title = $cat->name
             <div class="col-lg-4">
                 <div class="single-bottom mb-35">
                     <div class="trend-bottom-img mb-30">
-                        <img src="<?= $backend->baseUrl.'/'.$list->image ?>" alt="">
+                        <img class="img" src="<?= $backend->baseUrl.'/'.$list->image ?>" alt="">
                     </div>
                     <div class="trend-bottom-cap">
                         <h4 class="mt-3" style="height: 5rem;"><?= $list->title ?></h4>
@@ -75,17 +76,17 @@ $this->title = $cat->name
                         ?>
                             <p class = text-danger><?=$list->coin?> xu</p>
                             <p class= "text-warning">Bài viết của tôi</p>  
-                            <a name="" id="" class="btn btn-danger" href="/bai-viet/<?=$list->slug?>.html" role="button">Chi tiết</a>
+                            <a name="" id="" class="btn btn-danger" href="<?= Url::toRoute('/bai-viet/', true) ?>/<?=$list->slug?>.html" role="button">Chi tiết</a>
                         <?php }else{ 
                                         if(Yii::$app->user->isGuest){ ?>
                                             <p class = text-danger><?=$list->coin?> xu</p>
-                                            <a href="/login" id="" class="btn btn-danger" role="button">Mua ngay</a>
+                                            <a href="<?= Url::toRoute('/dang-nhap', true) ?>" id="" class="btn btn-danger" role="button">Mua ngay</a>
                                     <?php
                                         } else{
                                                 $check = PostBuy::find()->where(['post_id' => $list->id])->andWhere(['user_id' => Yii::$app->user->id])->one();
                                                 if($check){ ?>
                                                             <p class = text-success>Đã mua</p>
-                                                            <a name="" id="" class="btn btn-danger" href="/bai-viet/<?=$list->slug?>.html" role="button">Chi tiết</a>
+                                                            <a name="" id="" class="btn btn-danger" href="<?= Url::toRoute('/bai-viet/', true) ?>/<?=$list->slug?>.html" role="button">Chi tiết</a>
                                                     <?php } else{ ?>
                                                                     <p class = text-danger><?=$list->coin?> xu</p>
                                                                     <button type="button" class="btn btn-primary select" data-id= "<?= $list->id ?>" data-toggle="modal" data-target="#myModal">Mua ngay</button>

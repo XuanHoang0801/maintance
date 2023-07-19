@@ -1,5 +1,6 @@
 <?php
 
+use frontend\assets\BackendAsset;
 use yii\helpers\Url;
 use yii\helpers\Html;
 use kartik\file\FileInput;
@@ -10,11 +11,13 @@ use kartik\datetime\DateTimePicker;
 /** @var yii\web\View $this */
 /** @var frontend\models\Customer $model */
 /** @var yii\widgets\ActiveForm $form */
+$backend = BackendAsset::register($this);
+
 ?>
 
 <div class="customer-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'fullname')->textInput(['maxlength' => true]) ?>
 
@@ -29,15 +32,25 @@ use kartik\datetime\DateTimePicker;
 ?>
     <?= $form->field($model, 'gender')->radioList(Yii::$app->params['customer.gender']) ?> 
 
-   <?php 
-        echo $form->field($model, 'avt')->widget(FileInput::classname(), [
-            'options' => ['multiple' => true],
-            'pluginOptions' => ['previewFileType' => 'any']
+   <?=
+         $form->field($model, 'avt')->widget(FileInput::classname(), [
+            'options' => ['multiple' => false,'accept' => 'image/*'],
+            'pluginOptions' => [
+                'initialPreview'=>[
+                    Html::img( $backend->baseUrl."/" . $model->avt,['width' => '70%'])
+                ],
+                'overwriteInitial'=>false,
+                'browseClass' => 'btn btn-success',
+                'showUpload' => false,
+                'removeClass' => 'btn btn-danger',
+            ]
         ]);
-?>
+    ?>
+
+
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Cập nhật thông tin'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Cập nhật thông tin'), ['class' => 'btn btn-success mt-3']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

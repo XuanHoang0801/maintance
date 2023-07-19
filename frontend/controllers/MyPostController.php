@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
+use yii\helpers\Url;
 use yii\web\Controller;
 use frontend\models\Post;
 use yii\web\UploadedFile;
@@ -61,7 +62,7 @@ class MyPostController extends Controller
         // return $this->render('view', [
         //     'model' => $this->findModel($id),
         // ]);
-        return $this->redirect('/bai-viet/'.$model->slug.'.html');
+        return $this->redirect(Url::toRoute('/bai-viet/'.$model->slug.'.html'));
     }
 
     /**
@@ -75,17 +76,19 @@ class MyPostController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) ) {
-               if ($model->load($this->request->post())) {
+
                 $model->author_id = Yii::$app->user->id;
-                $model->save();
-                $model->image = UploadedFile::getInstance($model, 'image');
-                $fileName = $model->slug . '.' . $model->image->extension;
-                $model->image->saveAs('@backend/web/uploads/' .$fileName ); // lưu ảnh vào thư mục uploads
-                
-                $model->image = $fileName; // lưu vào database
+                $image = UploadedFile::getInstance($model, 'image');
+                if(!$image){
+                    $model->image = 'image.png';
+                }
+                else{
+                    $fileName = $model->slug . '.' . $image->extension;
+                    $image->saveAs(Yii::getAlias('@backend/web/uploads/') .$fileName ); // lưu ảnh vào thư mục uploads
+                    $model->image = $fileName; // lưu vào database
+                }
                 $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
-            }
             }
         } else {
             $model->loadDefaultValues();

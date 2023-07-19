@@ -15,6 +15,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
+    'language'=>'vi', // tiếng việt
     'modules' => [],
     'components' => [
         'request' => [
@@ -46,7 +47,7 @@ return [
         ],
 
         'urlManager' => [
-        'baseUrl'=> $baseUrl,
+            'baseUrl'=> $baseUrl,
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [

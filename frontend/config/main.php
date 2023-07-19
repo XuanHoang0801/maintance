@@ -1,4 +1,6 @@
 <?php
+use yii\web\Request;
+$baseUrl = str_replace('/frontend/web','',(new Request)->getBaseUrl());
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -38,13 +40,18 @@ return [
             'errorAction' => 'site/error',
         ],
         
+        'request' => [
+            'baseUrl'=> $baseUrl,
+        ],
+        
         'urlManager' => [
+            'baseUrl'=> $baseUrl,
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'login' => 'site/login',
-                'signup' => 'site/signup',
-                'change-password' => 'site/change-password',
+                'dang-nhap' => 'site/login',
+                'dang-ky' => 'site/signup',
+                'doi-mat-khau' => 'site/change-password',
                 'thong-tin' => 'customer/info',
                 'nap-xu' =>'site/load-card',
                 'lich-su-mua' => '/history/index',

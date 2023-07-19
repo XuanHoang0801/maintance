@@ -95,7 +95,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $hot = Post::find()->where(['is_free' => 1])->andWhere(['is_hot' => 1])->andWhere(['is_show'=>1])->orderBy(['id' => SORT_DESC])->all();
-        $charge = Post::find()->where(['is_free' => 0])->andWhere(['!=', 'author_id',Yii::$app->user->id])->andWhere(['is_show'=>1])->orderBy(['id' => SORT_DESC])->all();
+        $charge = Post::find()->where(['is_free' => 0])->andWhere(['is_show'=>1])->orderBy(['id' => SORT_DESC])->all();
         return $this->render('index',[
             'hot' =>$hot,
             'charge' => $charge

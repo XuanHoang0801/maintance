@@ -1,6 +1,8 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
+use kartik\file\FileInput;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
@@ -12,9 +14,20 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'content')->fileInput(['class' => 'form-control']) ?>
+    <?=
+         $form->field($model, 'content')->widget(FileInput::classname(), [
+            'options' => ['multiple' => false,'accept' => 'image/*'],
+            'pluginOptions' => [
+                'initialPreview'=>[
+                    Html::img( Url::toRoute('/uploads').'/' . $model->image,['width' => '70%'])
+                ],
+                'overwriteInitial'=>false,
+                'browseClass' => 'btn btn-success',
+                'showUpload' => false,
+                'removeClass' => 'btn btn-danger',
+            ]
+        ]);
+    ?>
 
    
     <div class="form-group mt-3">

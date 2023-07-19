@@ -1,6 +1,7 @@
 <?php
 /** @var yii\web\View $this */
 
+use yii\helpers\Url;
 use yii\helpers\BaseUrl;
 use yii\widgets\ActiveForm;
 use frontend\assets\BackendAsset;
@@ -33,7 +34,8 @@ $backend = BackendAsset::register($this);
                <div class="blog_right_sidebar">
                   <aside class="single_sidebar_widget search_widget">
                   <?php $form = ActiveForm::begin([
-                                                                    'action' => '/tim-kiem',
+                                                                   'action' => Url::toRoute('/tim-kiem', true),
+
                                                                     'method' => 'get',
                                                                 ]); ?>
                                     <div class="form-group">

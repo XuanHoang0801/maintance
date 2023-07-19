@@ -1,7 +1,9 @@
 <?php
 
-use app\models\Category;
+use yii\helpers\Url;
 use yii\helpers\Html;
+use app\models\Category;
+use kartik\file\FileInput;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use dosamigos\ckeditor\CKEditor;
@@ -41,7 +43,22 @@ use dosamigos\ckeditor\CKEditor;
 
     <?= $form->field($model, 'coin')->textInput() ?>
 
-    <?= $form->field($model, 'image')->fileInput(['class' => 'form-control']) ?>
+    <!-- <?= $form->field($model, 'image')->fileInput(['class' => 'form-control']) ?> -->
+
+    <?=
+         $form->field($model, 'image')->widget(FileInput::classname(), [
+            'options' => ['multiple' => false,'accept' => 'image/*'],
+            'pluginOptions' => [
+                'initialPreview'=>[
+                    Html::img( Url::toRoute('/uploads').'/' . $model->image,['width' => '70%'])
+                ],
+                'overwriteInitial'=>false,
+                'browseClass' => 'btn btn-success',
+                'showUpload' => false,
+                'removeClass' => 'btn btn-danger',
+            ]
+        ]);
+    ?>
 
 
 

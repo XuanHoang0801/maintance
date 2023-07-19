@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -39,7 +40,18 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'password_reset_token',
             'email:email',
             'status',
-            'avt',
+            [
+                'attribute'=> 'avt',
+                'format' => ['image',['width'=>'50']], 
+                'options' => ['style' => 'width:10%'],
+
+                'value' => function($searchModel){
+                    // $backend = BackendAsset::register($this);
+
+                    return  Url::toRoute('/uploads/'.$searchModel->avt);
+
+                },
+            ],
             'coin',
             // 'type:boolean',
             // 'created_at',
