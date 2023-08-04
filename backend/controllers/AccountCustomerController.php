@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use yii\web\Controller;
 use app\models\Customer;
+use app\models\Post;
 use yii\filters\VerbFilter;
 use backend\models\CustomerSearch;
 use yii\web\NotFoundHttpException;
@@ -112,7 +113,13 @@ class AccountCustomerController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        // $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        \Yii::$app->db->createCommand("UPDATE post SET is_show = 0  WHERE author_id = $model->id")->execute();
+        
+        $model->status = 9;
+        $model->save();
+       
 
         return $this->redirect(['index']);
     }
