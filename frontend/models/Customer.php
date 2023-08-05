@@ -43,6 +43,19 @@ class Customer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+<<<<<<< HEAD
+            [[ 'password_old','re_password','password_new'], 'required'],
+            [[ 'password_old','re_password','password_new'], 'string','min'=>6, 'max'=>12],
+
+            // [['status', 'created_at', 'updated_at'], 'integer'],
+            // [['type'], 'boolean'],
+            // [['username', 'password_hash', 'password_reset_token', 'email', 'avt', 'coin', 'verification_token'], 'string', 'max' => 255],
+            // [['auth_key'], 'string', 'max' => 32],
+            // [['username'], 'unique'],
+            // [['email'], 'unique'],
+            // [['password_reset_token'], 'unique'],
+            
+=======
             [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at','password_old','re_password','password_new'], 'required'],
             [['status', 'created_at', 'updated_at'], 'integer'],
             [['type'], 'boolean'],
@@ -51,6 +64,7 @@ class Customer extends \yii\db\ActiveRecord
             [['username'], 'unique'],
             [['email'], 'unique'],
             [['password_reset_token'], 'unique'],
+>>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
         ];
     }
 
@@ -73,6 +87,9 @@ class Customer extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'verification_token' => Yii::t('app', 'Verification Token'),
+            'password_old' => Yii::t('app', 'Mật khẩu cũ'),
+            'password_new' => Yii::t('app', 'Mật khẩu mới '),
+            're_password' => Yii::t('app', 'Xác thực mật khẩu'),
         ];
     }
 

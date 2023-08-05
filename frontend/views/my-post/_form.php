@@ -1,14 +1,18 @@
 <?php
 
-use frontend\models\Category;
+use frontend\assets\BackendAsset;
 use yii\helpers\Html;
+use kartik\file\FileInput;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use frontend\models\Category;
 use dosamigos\ckeditor\CKEditor;
 
 /** @var yii\web\View $this */
 /** @var app\models\Post $model */
 /** @var yii\widgets\ActiveForm $form */
+$backend = BackendAsset::register($this);
+
 ?>
 
 <div class="post-form">
@@ -41,12 +45,25 @@ use dosamigos\ckeditor\CKEditor;
 
     <?= $form->field($model, 'coin')->textInput() ?>
 
-    <?= $form->field($model, 'image')->fileInput(['class' => 'form-control']) ?>
+    <?=
+         $form->field($model, 'image')->widget(FileInput::classname(), [
+            'options' => ['multiple' => false,'accept' => 'image/*'],
+            'pluginOptions' => [
+                'initialPreview'=>[
+                     Html::img( $backend->baseUrl."/" . $model->image,['width' => '70%'])
+                ],
+                'overwriteInitial'=>false,
+                'browseClass' => 'btn btn-success',
+                'showUpload' => false,
+                'removeClass' => 'btn btn-danger',
+            ]
+        ]);
+    ?>
 
 
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success mt-3']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Lưu bài viết'), ['class' => 'btn btn-success mt-3']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use frontend\models\Customer;
 
 /**
  * This is the model class for table "post_buy".
@@ -68,6 +69,6 @@ class PostBuy extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::class, ['id' => 'user_id']);
+        return $this->hasOne(Customer::class, ['id' => 'user_id']);
     }
 }

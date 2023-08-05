@@ -16,7 +16,7 @@ $this->title = 'Đổi mật khẩu';
 
                                 <?php $form = ActiveForm::begin(['id' => 'change-form']); ?>
 
-                                    <?= $form->field($model, 'password_old')->passwordInput()->label(Yii::t('app', 'Mật khẩu hiện tại'))?>
+                                    <?= $form->field($model, 'password_old')->passwordInput()->label(Yii::t('app', 'Mật khẩu cũ'))?>
 
                                     <?= $form->field($model, 'password_new')->passwordInput()->label(Yii::t('app', 'Mật khẩu mới'))?>
 

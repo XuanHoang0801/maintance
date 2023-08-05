@@ -38,10 +38,7 @@ $this->params['breadcrumbs'][] = 'bai-viet';
                 'options' => ['style' => 'width:10%'],
 
                 'value' => function($searchModel){
-                    // $backend = BackendAsset::register($this);
-
                     return  Url::toRoute('/uploads/'.$searchModel->image);
-
                 },
             ],
 

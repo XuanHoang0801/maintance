@@ -1,5 +1,9 @@
 <?php
 return [
     'bsVersion' => '4.x',
-    'adminEmail' => 'admin@example.com',
+    'adminEmail' => 'nguyenxuanhoang812@gmail.com',
+    'customer.gender' => [
+        'Nam'=> 'Nam',
+        'Nữ' => 'Nữ'
+    ]
 ];

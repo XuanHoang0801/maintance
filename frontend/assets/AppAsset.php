@@ -31,6 +31,7 @@ class AppAsset extends AssetBundle
         // 'js/vendor/jquery-1.12.4.min.js',
         'js/popper.min.js',
         'js/bootstrap.min.js',
+        'js/view_file.js',
         // 'js/jquery.slicknav.min.js',
         // 'js/owl.carousel.min.js',
         // 'js/slick.min.js',

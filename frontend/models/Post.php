@@ -3,9 +3,10 @@
 namespace frontend\models;
 
 use Yii;
+use yii\db\Expression;
+use frontend\models\Customer;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
-use yii\db\Expression;
 
 /**
  * This is the model class for table "post".
@@ -70,7 +71,6 @@ class Post extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['title', 'slug', 'image'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
-            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['author_id' => 'id']],
         ];
     }
 
@@ -85,7 +85,7 @@ class Post extends \yii\db\ActiveRecord
             'slug' => Yii::t('app', 'Slug'),
             'short' => Yii::t('app', 'Tóm tắt'),
             'detail' => Yii::t('app', 'Chi tiết'),
-            'category_id' => Yii::t('app', 'Category ID'),
+            'category_id' => Yii::t('app', 'Chuyên mục'),
             'author_id' => Yii::t('app', 'Author ID'),
             'is_hot' => Yii::t('app', 'Nổi bật'),
             'is_show' => Yii::t('app', 'Xuất bản'),
@@ -104,7 +104,7 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getAuthor()
     {
-        return $this->hasOne(User::class, ['id' => 'author_id']);
+        return $this->hasOne(Customer::class, ['id' => 'author_id']);
     }
 
     /**

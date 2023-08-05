@@ -25,7 +25,7 @@ use yii\helpers\Url;
     <ul id="components-nav-<?=$parent->id?>" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <?php foreach (Menu::menuChild($parent->id) as $child) :  ?>
         <li>
-          <a href="/<?= $child->slug ?>">
+          <a href="<?= Url::toRoute("/".$child->slug) ?>">
             <span><?= $child->name?></span>
           </a>
         </li>

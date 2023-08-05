@@ -1,4 +1,6 @@
 <?php
+use yii\web\Request;
+$baseUrl = str_replace('/frontend/web','',(new Request)->getBaseUrl());
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -10,6 +12,7 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language'=>'vi', // tiếng việt
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
@@ -37,14 +40,29 @@ return [
             'errorAction' => 'site/error',
         ],
         
+        'request' => [
+            'baseUrl'=> $baseUrl,
+        ],
+        
         'urlManager' => [
+            'baseUrl'=> $baseUrl,
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+<<<<<<< HEAD
+                'dang-nhap' => 'site/login',
+                'dang-ky' => 'site/signup',
+                'doi-mat-khau' => 'site/change-password',
+                'thong-tin' => 'customer/info',
+                'nap-xu' =>'site/load-card',
+                'lich-su-mua' => '/history/index',
+                'tim-kiem' => '/site/search',
+=======
                 'login' => 'site/login',
                 'signup' => 'site/signup',
                 'change-password' => 'site/change-password',
                 'thong-tin' => 'site/info',
+>>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
 
                 'my-post/trang-<page:\d+>' => 'my-post/index',
                 'my-post/<id:\d+>'=>'my-post/view',
@@ -77,6 +95,19 @@ return [
         //     'baseUrl' => 'backend/web/uploads/',
         //     'enablePrettyUrl' => true,
         //     'showScriptName' => false,
+        // ],
+        // 'i18n' => [
+        //     'translations' => [
+        //         'app' => [
+        //             'class' => 'yii\i18n\PhpMessageSource',
+        //             // 'basePath' => '@app/messages',
+        //             'sourceLanguage' => 'vi',
+        //             'fileMap' => [
+        //                 'app' => 'app.php',
+        //                 'app/error' => 'error.php',
+        //             ],
+        //         ],
+        //     ],
         // ],
     ],
     'params' => $params,
