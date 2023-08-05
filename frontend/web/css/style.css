@@ -1,8 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Inconsolata:700");
 @import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap");
-.help-block{
-  color: #ff656a;
-}
 .color1 {
   background: #ffe7e6;
 }
@@ -145,11 +142,8 @@ p {
   color: #506172;
   font-size: 16px;
   line-height: 30px;
-  margin-bottom: .1rem;
+  margin-bottom: 15px;
   font-weight: normal;
-}
-main{
-  border-top: 1px solid #8e8d8d;
 }
 .bg-img-1 {
   background-image: url(../img/slider/slider-img-1.jpg);
@@ -367,9 +361,14 @@ hr {
   letter-spacing: 1px;
   line-height: 0;
   margin-bottom: 0;
+<<<<<<< HEAD
   padding: 10rem 0;
+=======
+  padding: 27px 44px;
+>>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
   border-radius: 5px;
   min-width: 200px;
+  margin: 10px;
   cursor: pointer;
   transition: color 0.4s linear;
   position: relative;
@@ -2392,7 +2391,6 @@ hr {
   .single-bottom
   .trend-bottom-cap
   h4 {
-   
   font-size: 18px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {

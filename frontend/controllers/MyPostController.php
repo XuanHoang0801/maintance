@@ -58,11 +58,17 @@ class MyPostController extends Controller
      */
     public function actionView($id)
     {
+<<<<<<< HEAD
         $model = $this->findModel($id);
         // return $this->render('view', [
         //     'model' => $this->findModel($id),
         // ]);
         return $this->redirect(Url::toRoute('/bai-viet/'.$model->slug.'.html'));
+=======
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+>>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
     }
 
     /**
@@ -94,7 +100,7 @@ class MyPostController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }

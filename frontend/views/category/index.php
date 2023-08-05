@@ -13,8 +13,8 @@ $this->title = $cat->name
 ?>
 <div class="row d-flex justify-content-between mt-3">
     <div class="col-lg-3 col-md-3">
-        <div class="trending-tittle">
-            <strong><?=  $cat->name ?></strong>   
+        <div class="section-tittle mb-30">
+            <h3><?=  $cat->name ?></h3>
         </div>
     </div>
 </div>
@@ -36,8 +36,13 @@ $this->title = $cat->name
                         <img class= "img" src="<?= $backend->baseUrl.'/'.$listFree->image ?>" alt="">
                     </div>
                     <div class="trend-bottom-cap">
+<<<<<<< HEAD
                         <!-- <span class="color1"><?= $listFree->category->name ?></span> -->
                         <h4 class="mt-3" style="height: 5rem;"><?= $listFree->title ?></h4>
+=======
+                        <span class="color1"><?= $list->category->name ?></span>
+                        <h4 class="mt-3"><a href="/bai-viet/<?= $list->slug ?>.html"><?= $list->title ?></a></h4>
+>>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
 
                         <?php 
                             if($listFree->author_id == Yii::$app->user->id ){

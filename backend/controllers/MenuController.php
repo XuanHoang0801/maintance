@@ -2,12 +2,11 @@
 
 namespace backend\controllers;
 
-use Yii;
 use app\models\Menu;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
 use backend\models\MenuSearch;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 
 /**
  * MenuController implements the CRUD actions for Menu model.

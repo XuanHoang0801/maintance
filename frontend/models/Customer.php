@@ -15,7 +15,7 @@ use Yii;
  * @property string $email
  * @property int $status
  * @property string|null $avt
- * @property int|null $coin
+ * @property string|null $coin
  * @property bool|null $type
  * @property int $created_at
  * @property int $updated_at
@@ -29,7 +29,6 @@ class Customer extends \yii\db\ActiveRecord
     public $password_old;
     public $re_password;
     public $password_new;
-    public $captcha;
     /**
      * {@inheritdoc}
      */
@@ -44,6 +43,7 @@ class Customer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+<<<<<<< HEAD
             [[ 'password_old','re_password','password_new'], 'required'],
             [[ 'password_old','re_password','password_new'], 'string','min'=>6, 'max'=>12],
 
@@ -55,6 +55,16 @@ class Customer extends \yii\db\ActiveRecord
             // [['email'], 'unique'],
             // [['password_reset_token'], 'unique'],
             
+=======
+            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at','password_old','re_password','password_new'], 'required'],
+            [['status', 'created_at', 'updated_at'], 'integer'],
+            [['type'], 'boolean'],
+            [['username', 'password_hash', 'password_reset_token', 'email', 'avt', 'coin', 'verification_token'], 'string', 'max' => 255],
+            [['auth_key'], 'string', 'max' => 32],
+            [['username'], 'unique'],
+            [['email'], 'unique'],
+            [['password_reset_token'], 'unique'],
+>>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
         ];
     }
 

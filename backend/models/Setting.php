@@ -92,8 +92,4 @@ class Setting extends \yii\db\ActiveRecord
     {
         return self::find()->where(['key' => 'KEY_COPY_RIGHT'])->one();
     }
-    public static function Logo()
-    {
-        return self::find()->where(['key' => 'KEY_SETTING_LOGO'])->one();
-    }
 }

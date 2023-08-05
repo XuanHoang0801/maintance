@@ -15,6 +15,7 @@ class PostController extends \yii\web\Controller
     {
         $model = Post::find()->where(['slug' => $slug])->one();
         $category = Category::find()->where(['is_show' => 1])->all();
+<<<<<<< HEAD
         $relate =  Post::find()->where(['!=','id', $model->id])->andWhere(['category_id' => $model->category_id])->andWhere(['is_show' => 1])->orderBy(['id' => SORT_DESC])->all();
         $check = PostBuy::find()->where(['user_id' => Yii::$app->user->id])->andWhere(['post_id' => $model->id])->one();
         $checkAuthor = Post::find()->where(['author_id' => Yii::$app->user->id])->one();
@@ -29,6 +30,14 @@ class PostController extends \yii\web\Controller
         else{
             return $this->redirect('/');
         }
+=======
+        $relate =  Post::find()->where(['!=','id', $model->id])->orderBy(['id' => SORT_DESC])->all();
+        return $this->render('index',[
+            'model' => $model,
+            'category' => $category,
+            'relate' => $relate
+        ]);
+>>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
     }
     
     public function actionBuy(){

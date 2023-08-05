@@ -49,6 +49,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+<<<<<<< HEAD
                 'dang-nhap' => 'site/login',
                 'dang-ky' => 'site/signup',
                 'doi-mat-khau' => 'site/change-password',
@@ -56,6 +57,12 @@ return [
                 'nap-xu' =>'site/load-card',
                 'lich-su-mua' => '/history/index',
                 'tim-kiem' => '/site/search',
+=======
+                'login' => 'site/login',
+                'signup' => 'site/signup',
+                'change-password' => 'site/change-password',
+                'thong-tin' => 'site/info',
+>>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
 
                 'my-post/trang-<page:\d+>' => 'my-post/index',
                 'my-post/<id:\d+>'=>'my-post/view',

@@ -105,9 +105,10 @@ class PostController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $image = $model->image;
+        
         if ($this->request->isPost && $model->load($this->request->post())) {
             $model->image = UploadedFile::getInstance($model, 'image');
+<<<<<<< HEAD
             if($model->image != null){
                 $fileName = $model->slug .'-'.date('mdYhis'). '.' . $model->image->extension;
                 $model->image->saveAs('uploads/' .$fileName ); // lưu ảnh vào thư mục uploads
@@ -118,6 +119,13 @@ class PostController extends Controller
                 $model->image = $image;
                 $model->author_id = Yii::$app->user->id;
             }
+=======
+            $fileName = $model->slug . '.' . $model->image->extension;
+            $model->image->saveAs('uploads/' .$fileName ); // lưu ảnh vào thư mục uploads
+            
+            $model->author_id = Yii::$app->user->id;
+            $model->image = $fileName; // lưu vào database
+>>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
             $model->save();
 
             return $this->redirect(['view', 'id' => $model->id]);
