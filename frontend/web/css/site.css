@@ -101,3 +101,10 @@ a.desc:after {
 {
     text-decoration: none;
 }
+
+.like{
+    cursor: pointer;
+}
+.like:hover{
+    color: rgb(50, 93, 156) !important;
+}

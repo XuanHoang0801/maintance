@@ -2,14 +2,16 @@
 
 /** @var yii\web\View $this */
 
-<<<<<<< HEAD
 use yii\helpers\Url;
 use yii\web\YiiAsset;
 use frontend\models\Post;
-=======
->>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
 use backend\models\Setting;
+use common\models\Customer;
+use yii\widgets\ActiveForm;
+use frontend\models\PostBuy;
 use frontend\assets\BackendAsset;
+$this->registerJsFile('@web/js/popup.js', ['depends' =>  [YiiAsset::className()], ]);
+
 
 $backend =  BackendAsset::register($this);
 $this->title = Setting::title()->content;
@@ -22,8 +24,7 @@ $this->title = Setting::title()->content;
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="trending-tittle">
-                            <strong><?= Setting::trending()->content ?></strong>
-                            
+                            <strong><?= Setting::trending()->content ?></strong>   
                         </div>
                     </div>
                 </div>
@@ -41,13 +42,10 @@ $this->title = Setting::title()->content;
                                             <img src="<?= $backend->baseUrl.'/'.$listHost->image ?>" alt="">
                                         </div>
                                         <div class="trend-bottom-cap">
-<<<<<<< HEAD
                                             <h4 style="height: 5rem;"><a href="<?= Url::toRoute('/bai-viet/', true) ?>/<?= $listHost->slug ?>.html"><?= $listHost->title ?></a></h4>    
                                             <span class="color1"><?= $listHost->category->name ?></span>
-=======
-                                            <h4><a href="/bai-viet/<?= $listHost->slug ?>.html"><?= $listHost->title ?></a></h4>
->>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
                                         </div>
+
                                     </div>
                                 </div>
                                 <?php endforeach ?>
@@ -56,7 +54,6 @@ $this->title = Setting::title()->content;
                     </div>
                     <!-- Riht content -->
                     <div class="col-lg-4">
-<<<<<<< HEAD
                         <div class="blog_right_sidebar">
 
                             <aside class="single_sidebar_widget search_widget">
@@ -75,24 +72,11 @@ $this->title = Setting::title()->content;
                                 <?php ActiveForm::end(); ?>
                             </aside>
                         
-=======
-                        <div class="trand-right-single d-flex">
-                            <div class="trand-right-cap">
-                                <span class="color1">Bài viết tính phí</span>
-                            </div>
-                        </div>
-                        <?php foreach($charge as $chargeItem): ?>
-                            
->>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
                             <div class="trand-right-single d-flex">
-                                <div class="trand-right-cap  d-flex">
-                                    <div class="trand-right-img">
-                                        <img src="<?= $backend->baseUrl.'/'.$chargeItem->image ?>" alt="" width="100px">
-                                    </div>
-                                    <h4><a href="/bai-viet/<?= $chargeItem->slug ?>.html"><?= $chargeItem->title ?></a></h4>
+                                <div class="trending-tittle">
+                                    <strong class="color1">Bài viết tính phí</strong>
                                 </div>
                             </div>
-<<<<<<< HEAD
                                 <?php foreach($charge as $chargeItem): 
                                 
                                     $check = PostBuy::find()->where(['post_id' => $chargeItem->id])->andWhere(['user_id' => Yii::$app->user->id])->one();
@@ -143,14 +127,6 @@ $this->title = Setting::title()->content;
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
-=======
-                        <?php endforeach ?>
-
-
-                        <!-- <div class="trand-right-single d-flex">
-                            <div class="trand-right-img">
-                                <img src="assets/img/trending/right2.jpg" alt="">
->>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
                             </div>
                             <div class="modal-body">
                                 Bạn có chắc chắn muốn Mua ngay bài viết này không?

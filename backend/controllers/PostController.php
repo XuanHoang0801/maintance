@@ -4,11 +4,11 @@ namespace backend\controllers;
 
 use Yii;
 use app\models\Post;
-use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 use yii\filters\VerbFilter;
 use backend\models\PostSearch;
+use frontend\models\Like;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -56,14 +56,12 @@ class PostController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    // public function actionView($id)
-    // {
-    //     $model = $this->findModel($id);
-    //     // return $this->render('view', [
-    //     //     'model' => $this->findModel($id),
-    //     // ]);
-    //     return $this->redirect(Url::toRoute('../bai-viet/'.$model->slug.'.html'));
-    // }
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 
     /**
      * Creates a new Post model.
@@ -105,10 +103,9 @@ class PostController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        
+        $image = $model->image;
         if ($this->request->isPost && $model->load($this->request->post())) {
             $model->image = UploadedFile::getInstance($model, 'image');
-<<<<<<< HEAD
             if($model->image != null){
                 $fileName = $model->slug .'-'.date('mdYhis'). '.' . $model->image->extension;
                 $model->image->saveAs('uploads/' .$fileName ); // lưu ảnh vào thư mục uploads
@@ -119,13 +116,6 @@ class PostController extends Controller
                 $model->image = $image;
                 $model->author_id = Yii::$app->user->id;
             }
-=======
-            $fileName = $model->slug . '.' . $model->image->extension;
-            $model->image->saveAs('uploads/' .$fileName ); // lưu ảnh vào thư mục uploads
-            
-            $model->author_id = Yii::$app->user->id;
-            $model->image = $fileName; // lưu vào database
->>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
             $model->save();
 
             return $this->redirect(['view', 'id' => $model->id]);

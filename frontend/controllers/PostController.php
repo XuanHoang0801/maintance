@@ -2,11 +2,13 @@
 
 namespace frontend\controllers;
 
-use common\models\Customer;
-use frontend\models\Category;
 use Yii;
+use frontend\models\Like;
 use frontend\models\Post;
+use common\models\Customer;
+use common\widgets\Alert;
 use frontend\models\PostBuy;
+use frontend\models\Category;
 use PhpParser\Node\Stmt\Else_;
 
 class PostController extends \yii\web\Controller
@@ -15,7 +17,6 @@ class PostController extends \yii\web\Controller
     {
         $model = Post::find()->where(['slug' => $slug])->one();
         $category = Category::find()->where(['is_show' => 1])->all();
-<<<<<<< HEAD
         $relate =  Post::find()->where(['!=','id', $model->id])->andWhere(['category_id' => $model->category_id])->andWhere(['is_show' => 1])->orderBy(['id' => SORT_DESC])->all();
         $check = PostBuy::find()->where(['user_id' => Yii::$app->user->id])->andWhere(['post_id' => $model->id])->one();
         $checkAuthor = Post::find()->where(['author_id' => Yii::$app->user->id])->one();
@@ -30,14 +31,7 @@ class PostController extends \yii\web\Controller
         else{
             return $this->redirect('/');
         }
-=======
-        $relate =  Post::find()->where(['!=','id', $model->id])->orderBy(['id' => SORT_DESC])->all();
-        return $this->render('index',[
-            'model' => $model,
-            'category' => $category,
-            'relate' => $relate
-        ]);
->>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
+
     }
     
     public function actionBuy(){
@@ -81,6 +75,34 @@ class PostController extends \yii\web\Controller
 
         }
     }
-        
 
+    public function actionLike(){
+        if(Yii::$app->request->isPost){
+            $id = Yii::$app->request->post('id');
+            $user = Yii::$app->user->id;
+
+            $model = new Like();
+            $model->post_id = $id;
+            $model->user_id = $user;
+            $model->save();
+
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $count = Like::find()->where(['post_id' => $id])->all();
+            return [
+                'count' => count($count)
+            ];
+        }
+    }
+    public function actionUnLike(){
+        if(Yii::$app->request->isPost){
+            $id = Yii::$app->request->post('id');
+            $user = Yii::$app->user->id;
+            $model = Like::findOne(['post_id' => $id,'user_id' => $user])->delete();
+            $count = Like::find()->where(['post_id' =>$id])->all();
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return [
+                'count' => count($count)
+            ];
+        }
+    }
 }

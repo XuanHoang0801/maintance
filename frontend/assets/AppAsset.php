@@ -24,7 +24,8 @@ class AppAsset extends AssetBundle
         'css/themify-icons.css',
         'css/slick.css',
         'css/nice-select.css',
-        'css/style.css'
+        'css/style.css',
+        'css/site.css'
     ];
     public $js = [
         // 'js/vendor/modernizr-3.5.0.min.js',

@@ -35,14 +35,9 @@ $this->title = $cat->name
                     <div class="trend-bottom-img mb-30">
                         <img class= "img" src="<?= $backend->baseUrl.'/'.$listFree->image ?>" alt="">
                     </div>
-                    <div class="trend-bottom-cap">
-<<<<<<< HEAD
-                        <!-- <span class="color1"><?= $listFree->category->name ?></span> -->
+                    <!-- <div class="trend-bottom-cap">
+                        <span class="color1"><?= $listFree->category->name ?></span>
                         <h4 class="mt-3" style="height: 5rem;"><?= $listFree->title ?></h4>
-=======
-                        <span class="color1"><?= $list->category->name ?></span>
-                        <h4 class="mt-3"><a href="/bai-viet/<?= $list->slug ?>.html"><?= $list->title ?></a></h4>
->>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
 
                         <?php 
                             if($listFree->author_id == Yii::$app->user->id ){

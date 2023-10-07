@@ -79,13 +79,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-<<<<<<< HEAD
         $hot = Post::find()->where(['is_free' => 1])->andWhere(['is_hot' => 1])->andWhere(['is_show'=>1])->orderBy(['id' => SORT_DESC])->all();
         $charge = Post::find()->where(['is_free' => 0])->andWhere(['is_show'=>1])->orderBy(['id' => SORT_DESC])->all();
-=======
-        $hot = Post::find()->where(['is_free' => 1])->andWhere(['is_hot' => 1])->orderBy(['id' => SORT_DESC])->all();
-        $charge = Post::find()->where(['is_free' => 0])->orderBy(['id' => SORT_DESC])->all();
->>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
         return $this->render('index',[
             'hot' =>$hot,
             'charge' => $charge
@@ -319,6 +314,21 @@ class SiteController extends Controller
             'model'=>$model
         ]);
     }
+
+    public function actionSearch($key){
+        $model = Post::find()
+                ->where(['is_show' => 1])
+                ->andFilterWhere(['like', 'title', $key])
+                ->orderBy(['id' => SORT_DESC])->all();
+        if(!$model){
+            Yii::$app->session->setFlash('error', "Không có bài viết nào phù hợp với từ khóa tìm kiếm!");
+        }
+        return $this->render('search', [
+            'model' => $model,
+            'key' =>$key
+        ]);
+    }
+
 
     
 }

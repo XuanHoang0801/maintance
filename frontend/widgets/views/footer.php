@@ -1,16 +1,11 @@
 <?php
 
-<<<<<<< HEAD
 use yii\helpers\Url;
 use backend\models\Setting;
 use frontend\models\Category;
 use frontend\assets\BackendAsset;
 $backend = BackendAsset::register($this);
-=======
-use backend\models\Setting;
-use frontend\models\Category;
 
->>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
 ?>
  <!-- ======= Footer ======= -->
  <footer id="footer" class="footer">
@@ -21,13 +16,9 @@ use frontend\models\Category;
     <div class="row g-5">
       <div class="col-lg-4">
         <h3 class="footer-heading"><?= Setting::widgetOne()->content ?></h3>
-<<<<<<< HEAD
         <a href="<?= Url::toRoute('/') ?>"><img src="<?= $backend->baseUrl ?>/<?= Setting::logo()->content?>" width="100rem"></a>
         <p class="mt-3"><?= Setting::title()->content ?></p>
-=======
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam ab, perspiciatis beatae autem deleniti voluptate nulla a dolores, exercitationem eveniet libero laudantium recusandae officiis qui aliquid blanditiis omnis quae. Explicabo?</p>
-        <p><a href="about.html" class="footer-link-more">Learn More</a></p>
->>>>>>> 2e0cad38de619d2d7dfc0334eaa1d48ac13d6450
+
       </div>
       <div class="col-6 col-lg-2">
         <h3 class="footer-heading"><?= Setting::widgetTwo()->content ?></h3>

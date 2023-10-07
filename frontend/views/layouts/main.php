@@ -3,7 +3,6 @@
 /** @var \yii\web\View $this */
 /** @var string $content */
 
-use frontend\assets\BackendAsset;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\Html;
 use common\widgets\Alert;
@@ -11,6 +10,7 @@ use yii\bootstrap5\NavBar;
 use backend\models\Setting;
 use frontend\assets\AppAsset;
 use yii\bootstrap5\Breadcrumbs;
+use frontend\assets\BackendAsset;
 use frontend\widgets\FooterWidget;
 use frontend\widgets\HeaderWidget;
 $backend = BackendAsset::register($this);
