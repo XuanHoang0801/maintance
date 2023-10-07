@@ -286,8 +286,8 @@ hr {
   opacity: 0.5;
 }
 .section-padding {
-  padding-top: 120px;
-  padding-bottom: 120px;
+  /* padding-top: 120px;
+  padding-bottom: 120px; */
 }
 .separator {
   border-top: 1px solid #f2f2f2;

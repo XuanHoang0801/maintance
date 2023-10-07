@@ -2,11 +2,13 @@
 
 namespace frontend\controllers;
 
-use common\models\Customer;
-use frontend\models\Category;
 use Yii;
+use frontend\models\Like;
 use frontend\models\Post;
+use common\models\Customer;
+use common\widgets\Alert;
 use frontend\models\PostBuy;
+use frontend\models\Category;
 use PhpParser\Node\Stmt\Else_;
 
 class PostController extends \yii\web\Controller
@@ -73,6 +75,34 @@ class PostController extends \yii\web\Controller
 
         }
     }
-        
 
+    public function actionLike(){
+        if(Yii::$app->request->isPost){
+            $id = Yii::$app->request->post('id');
+            $user = Yii::$app->user->id;
+
+            $model = new Like();
+            $model->post_id = $id;
+            $model->user_id = $user;
+            $model->save();
+
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $count = Like::find()->where(['post_id' => $id])->all();
+            return [
+                'count' => count($count)
+            ];
+        }
+    }
+    public function actionUnLike(){
+        if(Yii::$app->request->isPost){
+            $id = Yii::$app->request->post('id');
+            $user = Yii::$app->user->id;
+            $model = Like::findOne(['post_id' => $id,'user_id' => $user])->delete();
+            $count = Like::find()->where(['post_id' =>$id])->all();
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return [
+                'count' => count($count)
+            ];
+        }
+    }
 }

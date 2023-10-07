@@ -1,20 +1,17 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
-use Yii;
-use yii\helpers\Url;
+use app\models\User;
+use backend\models\UserSearch;
 use yii\web\Controller;
-use frontend\models\Post;
-use yii\web\UploadedFile;
-use yii\filters\VerbFilter;
-use frontend\models\PostSearch;
 use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 
 /**
- * MyPostController implements the CRUD actions for Post model.
+ * AccountAdminController implements the CRUD actions for User model.
  */
-class MyPostController extends Controller
+class AccountAdminController extends Controller
 {
     /**
      * @inheritDoc
@@ -35,13 +32,13 @@ class MyPostController extends Controller
     }
 
     /**
-     * Lists all Post models.
+     * Lists all User models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new PostSearch();
+        $searchModel = new UserSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -51,57 +48,42 @@ class MyPostController extends Controller
     }
 
     /**
-     * Displays a single Post model.
+     * Displays a single User model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        $model = $this->findModel($id);
-        // return $this->render('view', [
-        //     'model' => $this->findModel($id),
-        // ]);
-        return $this->redirect(Url::toRoute('/bai-viet/'.$model->slug.'.html'));
-
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
     }
 
     /**
-     * Creates a new Post model.
+     * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Post();
+        $model = new User();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) ) {
-
-                $model->author_id = Yii::$app->user->id;
-                $image = UploadedFile::getInstance($model, 'image');
-                if(!$image){
-                    $model->image = 'image.png';
-                }
-                else{
-                    $fileName = $model->slug . '-'.date('dmYhis'). '.' . $image->extension;
-                    $image->saveAs(Yii::getAlias('@backend/web/uploads/') .$fileName ); // lưu ảnh vào thư mục uploads
-                    $model->image = $fileName; // lưu vào database
-                }
-                $model->save();
+            if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
         }
 
-        return $this->renderAjax('create', [
+        return $this->render('create', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing Post model.
+     * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -110,24 +92,9 @@ class MyPostController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $image = $model->image;
 
-        if ($this->request->isPost && $model->load($this->request->post())) {
-            if($model->image){
-                $model->image = UploadedFile::getInstance($model, 'image');
-                $fileName = $model->slug .date('dmYhis'). '.' . $model->image->extension;
-                $model->image->saveAs(Yii::getAlias('@backend/web/uploads/' .$fileName )); // lưu ảnh vào thư mục uploads
-                $model->image = $fileName; // lưu vào database
-                unlink(Yii::getAlias('@backend/web/uploads/'.$image));
-            }
-            else{
-                $model->image = $image;
-            }
-                $model->author_id = Yii::$app->user->id;
-                $model->save();
-
-    
-                return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -136,7 +103,7 @@ class MyPostController extends Controller
     }
 
     /**
-     * Deletes an existing Post model.
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -150,15 +117,15 @@ class MyPostController extends Controller
     }
 
     /**
-     * Finds the Post model based on its primary key value.
+     * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Post the loaded model
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Post::findOne(['id' => $id])) !== null) {
+        if (($model = User::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

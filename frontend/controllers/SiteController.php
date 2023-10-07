@@ -315,5 +315,20 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionSearch($key){
+        $model = Post::find()
+                ->where(['is_show' => 1])
+                ->andFilterWhere(['like', 'title', $key])
+                ->orderBy(['id' => SORT_DESC])->all();
+        if(!$model){
+            Yii::$app->session->setFlash('error', "Không có bài viết nào phù hợp với từ khóa tìm kiếm!");
+        }
+        return $this->render('search', [
+            'model' => $model,
+            'key' =>$key
+        ]);
+    }
+
+
     
 }

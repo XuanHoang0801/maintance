@@ -3,10 +3,13 @@
 
 use yii\helpers\Url;
 use yii\helpers\BaseUrl;
+use frontend\models\Like;
 use yii\widgets\ActiveForm;
 use frontend\assets\BackendAsset;
 
 $this->title = $model->title;
+$this->registerJsFile('@web/js/like.js', ['depends' =>  [yii\web\YiiAsset::className()], ]);
+
 $backend = BackendAsset::register($this);
 ?>
 <!--================Blog Area =================-->
@@ -19,10 +22,25 @@ $backend = BackendAsset::register($this);
                      <img class="img-fluid" src="<?= $backend->baseUrl.'/'.$model->image  ?>" alt="">
                   </div>
                   <div class="blog_details">
+                     <input type="hidden" name="" id= "id" value="<?= $model->id ?>">
                      <h2><?= $model->title ?>
                      </h2>
                      <ul class="blog-info-link mt-3 mb-4">
                         <li><a href="#"><i class="fa fa-user"></i> <?= $model->author->username ?></a></li>
+                        <?php
+                              $count = Like::find()->where(['post_id' => $model->id])->all();
+                           if(!Yii::$app->user->isGuest){
+
+                           $checkLike = Like::find()->where(['post_id' => $model->id])->andWhere(['user_id' => Yii::$app->user->id])->one();
+                           if($checkLike){
+                        ?>
+                           <li class = "text-primary like" id="unlike"><i class="fas fa-thumbs-down "></i>  Bỏ thích</li>
+                        <?php
+                           }else{
+                        ?>
+                           <li class = "text-primary like" id="like"><i class="fas fa-thumbs-up "></i>  Thích</li>
+                        <?php } } ?>
+                        <li class = "text-primary"><i class="fas fa-thumbs-up  "></i>  <span class="count-like"> <?= count($count) ?></span> </li>
                         <li><a href="#"><i class="fa fa-comments"></i> </a></li>
                      </ul>
                      <?= $model->detail ?>
@@ -34,19 +52,18 @@ $backend = BackendAsset::register($this);
                <div class="blog_right_sidebar">
                   <aside class="single_sidebar_widget search_widget">
                   <?php $form = ActiveForm::begin([
-                                                                   'action' => Url::toRoute('/tim-kiem', true),
-
-                                                                    'method' => 'get',
-                                                                ]); ?>
-                                    <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="key" placeholder='Nhập từ khóa tìm kiếm...' required>
-                                        <div class="input-group-append">
-                                            <button class="btns" type="submit"><i class="ti-search"></i></button>
-                                        </div>
-                                    </div>
-                                    </div>
-                                <?php ActiveForm::end(); ?>
+                                                   'action' => Url::toRoute('/tim-kiem', true),
+                                                   'method' => 'get',
+                                                   ]); ?>
+                        <div class="form-group">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="key" placeholder='Nhập từ khóa tìm kiếm...' required>
+                            <div class="input-group-append">
+                                <button class="btns" type="submit"><i class="ti-search"></i></button>
+                            </div>
+                        </div>
+                        </div>
+                  <?php ActiveForm::end(); ?>
                   </aside>
                   <aside class="single_sidebar_widget post_category_widget">
                      <h4 class="widget_title">Thể loại</h4>
