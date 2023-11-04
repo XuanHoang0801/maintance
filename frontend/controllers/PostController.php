@@ -3,10 +3,11 @@
 namespace frontend\controllers;
 
 use Yii;
+use common\widgets\Alert;
 use frontend\models\Like;
 use frontend\models\Post;
 use common\models\Customer;
-use common\widgets\Alert;
+use frontend\models\Comment;
 use frontend\models\PostBuy;
 use frontend\models\Category;
 use PhpParser\Node\Stmt\Else_;
@@ -105,4 +106,26 @@ class PostController extends \yii\web\Controller
             ];
         }
     }
+    
+    public function actionComment(){
+        if(Yii::$app->request->isPost){
+            $post_id = Yii::$app->request->post('post_id');
+            $content = Yii::$app->request->post('content');
+            $comment = new Comment();
+            $comment->post_id = $post_id;
+            $comment->user_id = Yii::$app->user->id;
+            $comment->content = $content;
+            $comment->created = date('Y-m-d H:i:s');
+            $comment->save();
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return[
+                'success' => 200,
+                'user' => $comment->customer->fullname,
+                'avt' => Yii::getAlias('@backend/web/uploads/'.$comment->customer->avt),
+                'time' => $comment->created,
+                'content' => $comment->content
+            ];
+        }
+    }
+
 }
