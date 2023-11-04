@@ -6,6 +6,7 @@ use yii\helpers\BaseUrl;
 use frontend\models\Like;
 use yii\widgets\ActiveForm;
 use frontend\assets\BackendAsset;
+use frontend\models\Comment;
 
 $this->title = $model->title;
 $this->registerJsFile('@web/js/like.js', ['depends' =>  [yii\web\YiiAsset::className()], ]);
@@ -44,9 +45,9 @@ $backend = BackendAsset::register($this);
                         <li><a href="#"><i class="fa fa-comments"></i> </a></li>
                      </ul>
                      <?= $model->detail ?>
+                     
                   </div>
-               </div>
-              
+               </div>  
             </div>
             <div class="col-lg-4">
                <div class="blog_right_sidebar">
@@ -91,6 +92,37 @@ $backend = BackendAsset::register($this);
                     <?php endforeach ?>
                   </aside>
                </div>
+            </div>
+            
+            <div class="form-comment <?php if(Yii::$app->user->isGuest) echo 'hide' ?>">
+               <div class="mb-3 mt-3">
+                  <label for="formGroupExampleInput" class="form-label">Viết bình luận <span class="ti-pencil"></span></label>
+                  <textarea class="form-control" id="content" rows="3" placeholder="Nội dung..."></textarea>
+                  <div class="mt-3">
+                     <button type="button" class="btn btn-primary" id="comment">Bình luận</button>
+                  </div>
+               </div>
+            </div>
+
+            <div class="list-comment mt-3">
+            <?php
+               $comment = Comment::find()->where(['post_id' => $model->id])->all();
+               if($comment){
+                  foreach($comment as $listComment){
+            ?>
+               <div class="comment-item d-flex">
+                  <div class="comment-avatar">
+                     <img class="avatar" src="<?= $backend->baseUrl.'/'.$listComment->customer->avt  ?>" alt="">
+                  </div>
+                  <div class="comment-content ">
+                     <div class="comment-top d-flex">
+                        <div class="comment-author"><strong><?= $listComment->customer->fullname ?></strong></div>
+                        <div class="comment-time fw-light ml-3"><?= $listComment->created ?></div>
+                     </div>
+                     <div class="comment-text"><?= $listComment->content ?></div>
+                  </div>
+               </div>
+            <?php }} ?>
             </div>
          </div>
       </div>

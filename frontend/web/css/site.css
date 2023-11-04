@@ -4,7 +4,7 @@ main > .container, main > .container-fluid
 }
 
 .footer {
-    background-color: #f5f5f5;
+    border-top: #8a8989 solid;
     font-size: .9em;
     height: 60px;
 }
@@ -107,4 +107,30 @@ a.desc:after {
 }
 .like:hover{
     color: rgb(50, 93, 156) !important;
+}
+
+.form-comment{
+    background-color: rgb(241, 193, 119);
+}
+.hide{
+    display: none;
+}
+.comment-avatar{
+    flex: 0 0 auto;
+    max-width: 100%;
+    width: 40px;
+    height: 40px;
+    margin: 0 12px 0 0;
+}
+.avatar{
+    background: #1a7900;
+    border-radius: 50%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
 }
